@@ -5,13 +5,13 @@ services:
     ports:
       - "6379:6379"
 
-  # media-server:
-  #   image: tiangolo/nginx-rtmp
-  #   ports:
-  #     - "1935:1935"
-  #   volumes:
-  #     - "./media_server/media_files:/var/media_files"
-  #     - "./media_server/nginx.conf:/etc/nginx/nginx.conf"
+  media-server:
+    image: tiangolo/nginx-rtmp
+    ports:
+      - "1935:1935"
+    volumes:
+      - "./media_server/media_files:/var/media_files"
+      - "./media_server/nginx.conf:/etc/nginx/nginx.conf"
 
   preprocessor:
     # runtime: nvidia
