@@ -15,8 +15,8 @@ services:
 
   preprocessor:
     # runtime: nvidia
-    image: registry.insight-centre.org/sit/event-service:latest
-    command: python /event-service/event_service/run.py --um
+    image: registry.insight-centre.org/sit/mps/preprocessing-service:latest
+    command: python /service/preprocessing/run.py
     depends_on:
       - redis
 
@@ -24,7 +24,8 @@ services:
       - PYTHONUNBUFFERED=0
       - REDIS_ADDRESS=redis
       - REDIS_PORT=${REDIS_PORT}
-      - EVENT_DISPATCHER_STREAM_KEY=${EVENT_DISPATCHER_STREAM_KEY}
-      - EVENT_DISPATCHER_CMD_KEY=${EVENT_DISPATCHER_CMD_KEY}
+      - SERVICE_STREAM_KEY=${PREPROCESSING_STREAM_KEY}
+      - SERVICE_CMD_KEY=${PREPROCESSING_CMD_KEY}
+      - FFMPEG_BIN=/service/ffmpeg_bin/ffmpeg-linux64-v3.3.1
       - LOGGING_LEVEL=DEBUG
     cpus: 1
