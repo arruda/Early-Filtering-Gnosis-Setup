@@ -60,3 +60,18 @@ services:
       - SERVICE_CMD_KEY=${EVENT_DISPATCHER_CMD_KEY}
       - LOGGING_LEVEL=DEBUG
     cpus: 0.25
+
+  window-manager:
+    image: registry.insight-centre.org/sit/mps/window-manager:latest
+    command: python /service/window_manager/run.py
+    depends_on:
+      - redis
+
+    environment:
+      - PYTHONUNBUFFERED=0
+      - REDIS_ADDRESS=redis
+      - REDIS_PORT=${REDIS_PORT}
+      - SERVICE_STREAM_KEY=${WINDOW_MANAGER_STREAM_KEY}
+      - SERVICE_CMD_KEY=${WINDOW_MANAGER_CMD_KEY}
+      - LOGGING_LEVEL=DEBUG
+    cpus: 0.25
