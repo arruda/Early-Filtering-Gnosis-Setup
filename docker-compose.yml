@@ -105,3 +105,18 @@ services:
       - SERVICE_CMD_KEY=${MATCHER_CMD_KEY}
       - LOGGING_LEVEL=DEBUG
     cpus: 0.25
+
+  forwarder:
+    image: registry.insight-centre.org/sit/mps/forwarder:latest
+    command: python /service/forwarder/run.py
+    depends_on:
+      - redis
+
+    environment:
+      - PYTHONUNBUFFERED=0
+      - REDIS_ADDRESS=redis
+      - REDIS_PORT=${REDIS_PORT}
+      - SERVICE_STREAM_KEY=${FORWARDER_STREAM_KEY}
+      - SERVICE_CMD_KEY=${FORWARDER_CMD_KEY}
+      - LOGGING_LEVEL=DEBUG
+    cpus: 0.25
