@@ -31,7 +31,6 @@ services:
     cpus: 2
 
   namespace-mapper:
-    # runtime: nvidia
     image: registry.insight-centre.org/sit/mps/namespace-mapper:latest
     command: python /service/namespace_mapper/run.py
     depends_on:
@@ -44,5 +43,20 @@ services:
       - SERVICE_STREAM_KEY=${NAMESPACE_MAPPER_STREAM_KEY}
       - SERVICE_CMD_KEY=${NAMESPACE_MAPPER_CMD_KEY}
       - PREPROCESSOR_CMD_KEY=${PREPROCESSOR_CMD_KEY}
+      - LOGGING_LEVEL=DEBUG
+    cpus: 0.25
+
+  event-dispatcher:
+    image: registry.insight-centre.org/sit/mps/event-dispatcher:latest
+    command: python /service/event_dispatcher/run.py
+    depends_on:
+      - redis
+
+    environment:
+      - PYTHONUNBUFFERED=0
+      - REDIS_ADDRESS=redis
+      - REDIS_PORT=${REDIS_PORT}
+      - SERVICE_STREAM_KEY=${EVENT_DISPATCHER_STREAM_KEY}
+      - SERVICE_CMD_KEY=${EVENT_DISPATCHER_CMD_KEY}
       - LOGGING_LEVEL=DEBUG
     cpus: 0.25
