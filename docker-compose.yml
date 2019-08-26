@@ -120,3 +120,18 @@ services:
       - SERVICE_CMD_KEY=${FORWARDER_CMD_KEY}
       - LOGGING_LEVEL=DEBUG
     cpus: 0.25
+
+  graph-builder:
+    image: registry.insight-centre.org/sit/mps/graph-builder:latest
+    command: python /service/graph_builder/run.py
+    depends_on:
+      - redis
+
+    environment:
+      - PYTHONUNBUFFERED=0
+      - REDIS_ADDRESS=redis
+      - REDIS_PORT=${REDIS_PORT}
+      - SERVICE_STREAM_KEY=${GRAPH_BUILDER_STREAM_KEY}
+      - SERVICE_CMD_KEY=${GRAPH_BUILDER_CMD_KEY}
+      - LOGGING_LEVEL=DEBUG
+    cpus: 0.25
