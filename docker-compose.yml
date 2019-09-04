@@ -13,6 +13,22 @@ services:
       - "./media_server/media_files:/var/media_files"
       - "./media_server/nginx.conf:/etc/nginx/nginx.conf"
 
+  query-manager:
+    # runtime: nvidia
+    image: registry.insight-centre.org/sit/mps/query-manager:latest
+    command: python /service/query_manager/run.py
+    depends_on:
+      - redis
+
+    environment:
+      - PYTHONUNBUFFERED=0
+      - REDIS_ADDRESS=redis
+      - REDIS_PORT=${REDIS_PORT}
+      - SERVICE_STREAM_KEY=${QUERY_MANAGER_STREAM_KEY}
+      - SERVICE_CMD_KEY=${QUERY_MANAGER_CMD_KEY}
+      - LOGGING_LEVEL=DEBUG
+    cpus: 0.25
+
   preprocessor:
     # runtime: nvidia
     image: registry.insight-centre.org/sit/mps/preprocessing-service:latest
@@ -133,5 +149,56 @@ services:
       - REDIS_PORT=${REDIS_PORT}
       - SERVICE_STREAM_KEY=${GRAPH_BUILDER_STREAM_KEY}
       - SERVICE_CMD_KEY=${GRAPH_BUILDER_CMD_KEY}
+      - LOGGING_LEVEL=DEBUG
+    cpus: 0.25
+
+  person-detection:
+    image: registry.insight-centre.org/sit/mps/content-extraction-service:latest
+    command: python /service/content_extraction_service/run.py
+    depends_on:
+      - redis
+
+    environment:
+      - PYTHONUNBUFFERED=0
+      - REDIS_ADDRESS=redis
+      - REDIS_PORT=${REDIS_PORT}
+      - SERVICE_STREAM_KEY=${PERSON_CONTENT_EXTRACTION_STREAM_KEY}
+      - SERVICE_CMD_KEY=${PERSON_CONTENT_EXTRACTION_CMD_KEY}
+      - DNN_CONFIG_RETURN_TRUE=false
+      - DNN_CONFIG_OBJECT_DETECTION_CLASS=person
+      - LOGGING_LEVEL=DEBUG
+    cpus: 0.25
+
+  car-detection:
+    image: registry.insight-centre.org/sit/mps/content-extraction-service:latest
+    command: python /service/content_extraction_service/run.py
+    depends_on:
+      - redis
+
+    environment:
+      - PYTHONUNBUFFERED=0
+      - REDIS_ADDRESS=redis
+      - REDIS_PORT=${REDIS_PORT}
+      - SERVICE_STREAM_KEY=${CAR_CONTENT_EXTRACTION_STREAM_KEY}
+      - SERVICE_CMD_KEY=${CAR_CONTENT_EXTRACTION_CMD_KEY}
+      - DNN_CONFIG_RETURN_TRUE=false
+      - DNN_CONFIG_OBJECT_DETECTION_CLASS=car
+      - LOGGING_LEVEL=DEBUG
+    cpus: 0.25
+
+  dog-detection:
+    image: registry.insight-centre.org/sit/mps/content-extraction-service:latest
+    command: python /service/content_extraction_service/run.py
+    depends_on:
+      - redis
+
+    environment:
+      - PYTHONUNBUFFERED=0
+      - REDIS_ADDRESS=redis
+      - REDIS_PORT=${REDIS_PORT}
+      - SERVICE_STREAM_KEY=${DOG_CONTENT_EXTRACTION_STREAM_KEY}
+      - SERVICE_CMD_KEY=${DOG_CONTENT_EXTRACTION_CMD_KEY}
+      - DNN_CONFIG_RETURN_TRUE=false
+      - DNN_CONFIG_OBJECT_DETECTION_CLASS=dog
       - LOGGING_LEVEL=DEBUG
     cpus: 0.25
