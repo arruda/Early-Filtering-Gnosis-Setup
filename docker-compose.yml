@@ -5,6 +5,8 @@ services:
     ports:
       - "6379:6379"
 
+    mem_limit: 4gb
+
   media-server:
     image: tiangolo/nginx-rtmp
     ports:
@@ -45,6 +47,7 @@ services:
       - SERVICE_STREAM_KEY=${PREPROCESSOR_STREAM_KEY}
       - SERVICE_CMD_KEY=${PREPROCESSOR_CMD_KEY}
       - FFMPEG_BIN=/service/ffmpeg_bin/ffmpeg-linux64-v3.3.1
+      - REDIS_EXPIRATION_TIME=10
       - LOGGING_LEVEL=DEBUG
     cpus: 2
 
@@ -152,6 +155,7 @@ services:
       - REDIS_PORT=${REDIS_PORT}
       - SERVICE_STREAM_KEY=${GRAPH_BUILDER_STREAM_KEY}
       - SERVICE_CMD_KEY=${GRAPH_BUILDER_CMD_KEY}
+      - WINDOW_MANAGER_STREAM_KEY=${FORWARDER_STREAM_KEY}
       - LOGGING_LEVEL=DEBUG
     cpus: 0.25
 
