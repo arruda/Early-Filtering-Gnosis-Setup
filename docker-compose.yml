@@ -160,7 +160,7 @@ services:
       - LOGGING_LEVEL=DEBUG
     cpus: 0.25
 
-  person-detection:
+  object-detection:
     runtime: nvidia
     image: registry.insight-centre.org/sit/mps/content-extraction-service:latest
     command: python /content-extractor/content_extraction_service/run.py
@@ -171,10 +171,15 @@ services:
       - PYTHONUNBUFFERED=0
       - REDIS_ADDRESS=redis
       - REDIS_PORT=${REDIS_PORT}
-      - SERVICE_STREAM_KEY=${PERSON_CONTENT_EXTRACTION_STREAM_KEY}
-      - SERVICE_CMD_KEY=${PERSON_CONTENT_EXTRACTION_CMD_KEY}
-      - DNN_CONFIG_RETURN_TRUE=True
-      - DNN_CONFIG_OBJECT_DETECTION_CLASS=person
+      - SERVICE_STREAM_KEY=${OBJECT_DETECTION_STREAM_KEY}
+      - SERVICE_CMD_KEY=${OBJECT_DETECTION_CMD_KEY}
+      - DNN_WEIGHTS_PATH=/content-extractor/content_extraction_service/dnn_model/tiny_yolo_voc_v2/yolov2-tiny-voc.weights
+      - DNN_CKPT_FOLDER_PATH=/content-extractor/content_extraction_service/dnn_model/tiny_yolo_voc_v2/ckpt/
+      - DNN_INPUT_HEIGHT=416
+      - DNN_INPUT_WIDTH=416
+      - DNN_SCORE_THRESHOLD=0.3
+      - DNN_IOU_THRESHOLD=0.3
+      - DNN_TF_GPU_FRACTION=0.7
       - LOGGING_LEVEL=DEBUG
     cpus: 2
 
