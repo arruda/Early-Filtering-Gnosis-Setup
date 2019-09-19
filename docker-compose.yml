@@ -183,6 +183,21 @@ services:
       - LOGGING_LEVEL=DEBUG
     cpus: 2
 
+  color-detection:
+    image: registry.insight-centre.org/sit/mps/color-detection-service:latest
+    command: python /service/color_detection_service/run.py
+    depends_on:
+      - redis
+
+    environment:
+      - PYTHONUNBUFFERED=0
+      - REDIS_ADDRESS=redis
+      - REDIS_PORT=${REDIS_PORT}
+      - SERVICE_STREAM_KEY=${COLOR_DETECTION_STREAM_KEY}
+      - SERVICE_CMD_KEY=${COLOR_DETECTION_CMD_KEY}
+      - LOGGING_LEVEL=DEBUG
+    cpus: 2
+
   # car-detection:
   #   image: registry.insight-centre.org/sit/mps/content-extraction-service:latest
   #   command: python /service/content_extraction_service/run.py
