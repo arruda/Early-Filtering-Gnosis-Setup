@@ -9,4 +9,11 @@ Then run: `docker-compose up -d` and wait until all services have started.
 
 # Stopping
 
-Execute: `docker-compose down`
+Execute: `docker-compose down` to stop all the containers.
+
+Execute: `docker-compose stop <service-name>` to stop a specific container.
+
+
+# Logs
+
+Use `docker-compose logs -f <service-name>`.
