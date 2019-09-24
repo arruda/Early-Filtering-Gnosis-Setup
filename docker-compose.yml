@@ -7,6 +7,14 @@ services:
 
     mem_limit: 4gb
 
+  # zipkin:
+  #     image: openzipkin/zipkin:2.15
+  #     ports:
+  #       - "9411:9411"
+  #     environment:
+  #     # Uncomment to enable debug logging
+  #       - JAVA_OPTS=-Dlogging.level.zipkin=DEBUG
+
   media-server:
     image: tiangolo/nginx-rtmp
     ports:
@@ -179,9 +187,10 @@ services:
       - DNN_INPUT_WIDTH=416
       - DNN_SCORE_THRESHOLD=0.3
       - DNN_IOU_THRESHOLD=0.3
-      - DNN_TF_GPU_FRACTION=0.7
+      - DNN_TF_GPU_FRACTION=0.25
       - LOGGING_LEVEL=DEBUG
-    cpus: 2
+    cpus: 1
+    mem_limit: 1500mb
 
   color-detection:
     image: registry.insight-centre.org/sit/mps/color-detection-service:latest
@@ -196,8 +205,8 @@ services:
       - SERVICE_STREAM_KEY=${COLOR_DETECTION_STREAM_KEY}
       - SERVICE_CMD_KEY=${COLOR_DETECTION_CMD_KEY}
       - LOGGING_LEVEL=DEBUG
-    cpus: 2
-
+    cpus: 0.5
+    mem_limit: 100mb
   # car-detection:
   #   image: registry.insight-centre.org/sit/mps/content-extraction-service:latest
   #   command: python /service/content_extraction_service/run.py
