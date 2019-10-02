@@ -8,23 +8,16 @@ services:
     mem_limit: 4gb
 
   jaeger:
-    image: jaegertracing/all-in-one:1.7
+    # image: jaegertracing/all-in-one:1.7
+    image: jaegertracing/all-in-one:1.14
     command: --log-level=debug
     ports:
       - 6831:6831/udp
       - 6832:6832/udp
       - 16686:16686
 
-  media-server:
-    image: tiangolo/nginx-rtmp
-    ports:
-      - "1935:1935"
-    volumes:
-      - "./media_server/media_files:/var/media_files"
-      - "./media_server/nginx.conf:/etc/nginx/nginx.conf"
-
   query-manager:
-    image: registry.insight-centre.org/sit/mps/query-manager:latest
+    image: registry.insight-centre.org/sit/mps/query-manager:${IMAGE_TAG}
     command: python /service/query_manager/run.py
     depends_on:
       - redis
@@ -45,7 +38,7 @@ services:
 
   preprocessor:
     # runtime: nvidia
-    image: registry.insight-centre.org/sit/mps/preprocessing-service:latest
+    image: registry.insight-centre.org/sit/mps/preprocessing-service:${IMAGE_TAG}
     command: python /service/preprocessing/run.py
     depends_on:
       - redis
@@ -64,7 +57,7 @@ services:
     cpus: 2
 
   namespace-mapper:
-    image: registry.insight-centre.org/sit/mps/namespace-mapper:latest
+    image: registry.insight-centre.org/sit/mps/namespace-mapper:${IMAGE_TAG}
     command: python /service/namespace_mapper/run.py
     depends_on:
       - redis
@@ -83,7 +76,7 @@ services:
     cpus: 0.25
 
   event-dispatcher:
-    image: registry.insight-centre.org/sit/mps/event-dispatcher:latest
+    image: registry.insight-centre.org/sit/mps/event-dispatcher:${IMAGE_TAG}
     command: python /service/event_dispatcher/run.py
     depends_on:
       - redis
@@ -100,7 +93,7 @@ services:
     cpus: 0.25
 
   window-manager:
-    image: registry.insight-centre.org/sit/mps/window-manager:latest
+    image: registry.insight-centre.org/sit/mps/window-manager:${IMAGE_TAG}
     command: python /service/window_manager/run.py
     depends_on:
       - redis
@@ -117,7 +110,7 @@ services:
     cpus: 0.25
 
   state-manager:
-    image: registry.insight-centre.org/sit/mps/state-manager:latest
+    image: registry.insight-centre.org/sit/mps/state-manager:${IMAGE_TAG}
     command: python /service/state_manager/run.py
     depends_on:
       - redis
@@ -134,7 +127,7 @@ services:
     cpus: 0.25
 
   matcher:
-    image: registry.insight-centre.org/sit/mps/matcher:latest
+    image: registry.insight-centre.org/sit/mps/matcher:${IMAGE_TAG}
     command: python /service/matcher/run.py
     depends_on:
       - redis
@@ -152,7 +145,7 @@ services:
     cpus: 0.25
 
   forwarder:
-    image: registry.insight-centre.org/sit/mps/forwarder:latest
+    image: registry.insight-centre.org/sit/mps/forwarder:${IMAGE_TAG}
     command: python /service/forwarder/run.py
     depends_on:
       - redis
@@ -169,7 +162,7 @@ services:
     cpus: 0.25
 
   graph-builder:
-    image: registry.insight-centre.org/sit/mps/graph-builder:latest
+    image: registry.insight-centre.org/sit/mps/graph-builder:${IMAGE_TAG}
     command: python /service/graph_builder/run.py
     depends_on:
       - redis
@@ -188,7 +181,7 @@ services:
 
   object-detection:
     runtime: nvidia
-    image: registry.insight-centre.org/sit/mps/content-extraction-service:latest
+    image: registry.insight-centre.org/sit/mps/content-extraction-service:${IMAGE_TAG}
     command: python /content-extractor/content_extraction_service/run.py
     depends_on:
       - redis
@@ -213,7 +206,7 @@ services:
     mem_limit: 1500mb
 
   color-detection:
-    image: registry.insight-centre.org/sit/mps/color-detection-service:latest
+    image: registry.insight-centre.org/sit/mps/color-detection-service:${IMAGE_TAG}
     command: python /service/color_detection_service/run.py
     depends_on:
       - redis
@@ -229,36 +222,3 @@ services:
       - LOGGING_LEVEL=DEBUG
     cpus: 0.5
     mem_limit: 100mb
-  # car-detection:
-  #   image: registry.insight-centre.org/sit/mps/content-extraction-service:latest
-  #   command: python /service/content_extraction_service/run.py
-  #   depends_on:
-  #     - redis
-
-  #   environment:
-  #     - PYTHONUNBUFFERED=0
-  #     - REDIS_ADDRESS=${REDIS_ADDRESS}
-  #     - REDIS_PORT=${REDIS_PORT}
-  #     - SERVICE_STREAM_KEY=${CAR_CONTENT_EXTRACTION_STREAM_KEY}
-  #     - SERVICE_CMD_KEY=${CAR_CONTENT_EXTRACTION_CMD_KEY}
-  #     - DNN_CONFIG_RETURN_TRUE=True
-  #     - DNN_CONFIG_OBJECT_DETECTION_CLASS=car
-  #     - LOGGING_LEVEL=DEBUG
-  #   cpus: 0.25
-
-  # dog-detection:
-  #   image: registry.insight-centre.org/sit/mps/content-extraction-service:latest
-  #   command: python /service/content_extraction_service/run.py
-  #   depends_on:
-  #     - redis
-
-  #   environment:
-  #     - PYTHONUNBUFFERED=0
-  #     - REDIS_ADDRESS=${REDIS_ADDRESS}
-  #     - REDIS_PORT=${REDIS_PORT}
-  #     - SERVICE_STREAM_KEY=${DOG_CONTENT_EXTRACTION_STREAM_KEY}
-  #     - SERVICE_CMD_KEY=${DOG_CONTENT_EXTRACTION_CMD_KEY}
-  #     - DNN_CONFIG_RETURN_TRUE=True
-  #     - DNN_CONFIG_OBJECT_DETECTION_CLASS=dog
-  #     - LOGGING_LEVEL=DEBUG
-  #   cpus: 0.25
