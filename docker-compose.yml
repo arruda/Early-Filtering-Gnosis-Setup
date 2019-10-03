@@ -17,7 +17,7 @@ services:
       - 16686:16686
 
   query-manager:
-    image: registry.insight-centre.org/sit/mps/query-manager:${IMAGE_TAG}
+    image: registry.insight-centre.org/sit/mps/docker-images/query-manager:${IMAGE_TAG}
     command: python /service/query_manager/run.py
     depends_on:
       - redis
@@ -38,7 +38,7 @@ services:
 
   preprocessor:
     # runtime: nvidia
-    image: registry.insight-centre.org/sit/mps/preprocessing-service:${IMAGE_TAG}
+    image: registry.insight-centre.org/sit/mps/docker-images/preprocessing-service:${IMAGE_TAG}
     command: python /service/preprocessing/run.py
     depends_on:
       - redis
@@ -57,7 +57,7 @@ services:
     cpus: 2
 
   namespace-mapper:
-    image: registry.insight-centre.org/sit/mps/namespace-mapper:${IMAGE_TAG}
+    image: registry.insight-centre.org/sit/mps/docker-images/namespace-mapper:${IMAGE_TAG}
     command: python /service/namespace_mapper/run.py
     depends_on:
       - redis
@@ -76,7 +76,7 @@ services:
     cpus: 0.25
 
   event-dispatcher:
-    image: registry.insight-centre.org/sit/mps/event-dispatcher:${IMAGE_TAG}
+    image: registry.insight-centre.org/sit/mps/docker-images/event-dispatcher:${IMAGE_TAG}
     command: python /service/event_dispatcher/run.py
     depends_on:
       - redis
@@ -93,7 +93,7 @@ services:
     cpus: 0.25
 
   window-manager:
-    image: registry.insight-centre.org/sit/mps/window-manager:${IMAGE_TAG}
+    image: registry.insight-centre.org/sit/mps/docker-images/window-manager:${IMAGE_TAG}
     command: python /service/window_manager/run.py
     depends_on:
       - redis
@@ -110,7 +110,7 @@ services:
     cpus: 0.25
 
   state-manager:
-    image: registry.insight-centre.org/sit/mps/state-manager:${IMAGE_TAG}
+    image: registry.insight-centre.org/sit/mps/docker-images/state-manager:${IMAGE_TAG}
     command: python /service/state_manager/run.py
     depends_on:
       - redis
@@ -127,7 +127,7 @@ services:
     cpus: 0.25
 
   matcher:
-    image: registry.insight-centre.org/sit/mps/matcher:${IMAGE_TAG}
+    image: registry.insight-centre.org/sit/mps/docker-images/matcher:${IMAGE_TAG}
     command: python /service/matcher/run.py
     depends_on:
       - redis
@@ -145,7 +145,7 @@ services:
     cpus: 0.25
 
   forwarder:
-    image: registry.insight-centre.org/sit/mps/forwarder:${IMAGE_TAG}
+    image: registry.insight-centre.org/sit/mps/docker-images/forwarder:${IMAGE_TAG}
     command: python /service/forwarder/run.py
     depends_on:
       - redis
@@ -162,7 +162,7 @@ services:
     cpus: 0.25
 
   graph-builder:
-    image: registry.insight-centre.org/sit/mps/graph-builder:${IMAGE_TAG}
+    image: registry.insight-centre.org/sit/mps/docker-images/graph-builder:${IMAGE_TAG}
     command: python /service/graph_builder/run.py
     depends_on:
       - redis
@@ -181,7 +181,7 @@ services:
 
   object-detection:
     runtime: nvidia
-    image: registry.insight-centre.org/sit/mps/content-extraction-service:${IMAGE_TAG}
+    image: registry.insight-centre.org/sit/mps/docker-images/content-extraction-service:${IMAGE_TAG}
     command: python /content-extractor/content_extraction_service/run.py
     depends_on:
       - redis
@@ -206,7 +206,7 @@ services:
     mem_limit: 1500mb
 
   color-detection:
-    image: registry.insight-centre.org/sit/mps/color-detection-service:${IMAGE_TAG}
+    image: registry.insight-centre.org/sit/mps/docker-images/color-detection-service:${IMAGE_TAG}
     command: python /service/color_detection_service/run.py
     depends_on:
       - redis
