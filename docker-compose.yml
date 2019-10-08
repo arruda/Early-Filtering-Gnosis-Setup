@@ -17,7 +17,7 @@ services:
       - 16686:16686
 
   query-manager:
-    image: registry.insight-centre.org/sit/mps/query-manager:${IMAGE_TAG}
+    image: registry.insight-centre.org/sit/mps/query-manager-mocked:${IMAGE_TAG}
     command: python /service/query_manager/run.py
     depends_on:
       - redis
@@ -33,6 +33,24 @@ services:
       - NAMESPACE_MAPPER_CMD_KEY=${NAMESPACE_MAPPER_CMD_KEY}
       - EVENT_DISPATCHER_CMD_KEY=${EVENT_DISPATCHER_CMD_KEY}
       - MATCHER_CMD_KEY=${MATCHER_CMD_KEY}
+      - LOGGING_LEVEL=DEBUG
+    cpus: 0.25
+
+  query-planner:
+    image: registry.insight-centre.org/sit/mps/query-planner:${IMAGE_TAG}
+    command: python /service/query_planner/run.py
+    depends_on:
+      - redis
+
+    environment:
+      - PYTHONUNBUFFERED=0
+      - REDIS_ADDRESS=${REDIS_ADDRESS}
+      - REDIS_PORT=${REDIS_PORT}
+      - TRACER_REPORTING_HOST=${TRACER_REPORTING_HOST}
+      - TRACER_REPORTING_PORT=${TRACER_REPORTING_PORT}
+      - SERVICE_STREAM_KEY=${QUERY_PLANNER_STREAM_KEY}
+      - SERVICE_CMD_KEY=${QUERY_PLANNER_CMD_KEY}
+      - EVENT_DISPATCHER_CMD_KEY=${EVENT_DISPATCHER_CMD_KEY}
       - LOGGING_LEVEL=DEBUG
     cpus: 0.25
 
@@ -184,7 +202,7 @@ services:
     image: registry.insight-centre.org/sit/mps/content-extraction-service:${IMAGE_TAG}
     command: python /content-extractor/content_extraction_service/run.py
     depends_on:
-      - redis
+     - redis
 
     environment:
       - PYTHONUNBUFFERED=0
