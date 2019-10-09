@@ -198,8 +198,8 @@ services:
     cpus: 0.25
 
   object-detection:
-    runtime: nvidia
     image: registry.insight-centre.org/sit/mps/content-extraction-service:${IMAGE_TAG}
+    entrypoint: /content-extractor/entrypoint.sh
     command: python /content-extractor/content_extraction_service/run.py
     depends_on:
      - redis
