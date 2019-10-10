@@ -1,9 +1,6 @@
 version: '2.3'
 services:
   media-server:
-    image: tiangolo/nginx-rtmp
+    image: registry.insight-centre.org/sit/mps/media-server:latest
     ports:
       - "1935:1935"
-    volumes:
-      - "./media_server/media_files:/var/media_files"
-      - "./media_server/nginx.conf:/etc/nginx/nginx.conf"
