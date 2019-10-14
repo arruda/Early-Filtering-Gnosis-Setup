@@ -17,7 +17,7 @@ services:
       - 16686:16686
 
   query-manager:
-    image: registry.insight-centre.org/sit/mps/query-manager-mocked:${IMAGE_TAG}
+    image: registry.insight-centre.org/sit/mps/query-manager:${IMAGE_TAG}
     command: python /service/query_manager/run.py
     depends_on:
       - redis
@@ -33,6 +33,7 @@ services:
       - NAMESPACE_MAPPER_CMD_KEY=${NAMESPACE_MAPPER_CMD_KEY}
       - EVENT_DISPATCHER_CMD_KEY=${EVENT_DISPATCHER_CMD_KEY}
       - MATCHER_CMD_KEY=${MATCHER_CMD_KEY}
+      - QUERY_PLANNER_CMD_KEY=${QUERY_PLANNER_CMD_KEY}
       - LOGGING_LEVEL=DEBUG
     cpus: 0.25
 
@@ -72,7 +73,7 @@ services:
       - FFMPEG_BIN=/service/ffmpeg_bin/ffmpeg-linux64-v3.3.1
       - REDIS_EXPIRATION_TIME=10
       - LOGGING_LEVEL=DEBUG
-    cpus: 2
+    cpus: 1
 
   namespace-mapper:
     image: registry.insight-centre.org/sit/mps/namespace-mapper:${IMAGE_TAG}
