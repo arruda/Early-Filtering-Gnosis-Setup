@@ -17,7 +17,7 @@ services:
       - 16686:16686
 
   query-manager:
-    image: registry.insight-centre.org/sit/mps/query-manager-mocked:${IMAGE_TAG}
+    image: registry.insight-centre.org/sit/mps/query-manager:dev
     command: python /service/query_manager/run.py
     depends_on:
       - redis
@@ -33,6 +33,8 @@ services:
       - NAMESPACE_MAPPER_CMD_KEY=${NAMESPACE_MAPPER_CMD_KEY}
       - EVENT_DISPATCHER_CMD_KEY=${EVENT_DISPATCHER_CMD_KEY}
       - MATCHER_CMD_KEY=${MATCHER_CMD_KEY}
+      - QUERY_PLANNER_CMD_KEY=${QUERY_PLANNER_CMD_KEY}
+      - FORWARDER_CMD_KEY=${FORWARDER_CMD_KEY}
       - LOGGING_LEVEL=DEBUG
     cpus: 0.25
 
