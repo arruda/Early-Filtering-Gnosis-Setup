@@ -1,0 +1,6 @@
+version: '2.3'
+services:
+  preprocessor:
+    image: registry.insight-centre.org/sit/mps/preprocessing-service:latest
+    mem_limit: 4gb
+    cpus: 1
