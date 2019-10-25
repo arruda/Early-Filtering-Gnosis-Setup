@@ -55,3 +55,14 @@ This should send some queries that will start the system.
 To verify the events that went through the system one just need to acess the Jaeger port: http://localhost:16686
 
 On this system is possible to use the search mechanism to get insights on what is occurred on the system execution.
+
+
+# Overriding Service Configurations for Development
+If one wishes to override certain configurations in the docker-compose.yml files, instead of applying the changes there one, the best way is to create a file (if it does not exist yet) called docker `docker-compose.override.yml`.
+
+This file is ignored by the version control (git) and will not be commited, so one can change whatever it is necessary to run specific simple development tests without worring that the changes will be inadvertently commited.
+
+An example of how this can be done can be seen in the contents of the file `example-docker-compose.override.yml`.
+More information on this can be read on the [docker-compose docs](https://docs.docker.com/compose/extends/#understanding-multiple-compose-files)
+
+***ps**: when using `compose-media.sh` or `compose-all.sh` it will automatically create an empty but valid `docker-compose.override.yml` file if it does not exist yet.*
