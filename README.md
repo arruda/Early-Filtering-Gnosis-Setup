@@ -42,12 +42,12 @@ Using the current Query Manager it is possible to start the system with a very s
 To do so just run:
 
 ```shell
-./compose-media up -d
+./compose-media.sh up -d
 ```
 This will start all the services including the media-server. Then run:
 
 ```shell
-./compose-media run --rm query-manager /bin/bash -c "cd query_manager && python send_veql_query.py"
+./compose-media.sh run --rm query-manager /bin/bash -c "cd query_manager && python send_veql_query.py"
 ```
 This should send some queries that will start the system.
 
