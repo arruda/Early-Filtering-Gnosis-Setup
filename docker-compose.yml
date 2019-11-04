@@ -250,7 +250,7 @@ services:
 
   publisher:
     image: registry.insight-centre.org/sit/mps/publisher:${IMAGE_TAG}
-    command: python /service/publisher/run.py --id Pub111 --sr rtmp://localhost/live/mystream
+    command: python publisher/run.py --id Pub555 --src rtmp://localhost/live/mystream
     depends_on:
       - redis
 
