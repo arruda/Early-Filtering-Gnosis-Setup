@@ -242,3 +242,18 @@ services:
       - LOGGING_LEVEL=DEBUG
     cpus: 0.5
     mem_limit: 100mb
+
+  publisher:
+    image: registry.insight-centre.org/sit/mps/publisher:${IMAGE_TAG}
+    command: python /service/publisher/run.py --id Pub111 --sr rtmp://localhost/live/mystream
+    depends_on:
+      - redis
+
+    environment:
+      - PYTHONUNBUFFERED=0
+      - REDIS_ADDRESS=${REDIS_ADDRESS}
+      - REDIS_PORT=${REDIS_PORT}
+      - PUBLISHER_CMD_KEY_TAG=${PUBLISHER_CMD_KEY_TAG}
+      - CLIENT_MANAGER_CMD_KEY=${CLIENT_MANAGER_CMD_KEY}
+      - LOGGING_LEVEL=DEBUG
+    cpus: 0.25
