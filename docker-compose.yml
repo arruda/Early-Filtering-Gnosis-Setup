@@ -117,40 +117,6 @@ services:
       - LOGGING_LEVEL=DEBUG
     cpus: 0.25
 
-  window-manager:
-    image: registry.insight-centre.org/sit/mps/window-manager:${IMAGE_TAG}
-    command: python /service/window_manager/run.py
-    depends_on:
-      - redis
-
-    environment:
-      - PYTHONUNBUFFERED=0
-      - REDIS_ADDRESS=${REDIS_ADDRESS}
-      - REDIS_PORT=${REDIS_PORT}
-      - TRACER_REPORTING_HOST=${TRACER_REPORTING_HOST}
-      - TRACER_REPORTING_PORT=${TRACER_REPORTING_PORT}
-      - SERVICE_STREAM_KEY=${WINDOW_MANAGER_STREAM_KEY}
-      - SERVICE_CMD_KEY=${WINDOW_MANAGER_CMD_KEY}
-      - LOGGING_LEVEL=DEBUG
-    cpus: 0.25
-
-  state-manager:
-    image: registry.insight-centre.org/sit/mps/state-manager:${IMAGE_TAG}
-    command: python /service/state_manager/run.py
-    depends_on:
-      - redis
-
-    environment:
-      - PYTHONUNBUFFERED=0
-      - REDIS_ADDRESS=${REDIS_ADDRESS}
-      - REDIS_PORT=${REDIS_PORT}
-      - TRACER_REPORTING_HOST=${TRACER_REPORTING_HOST}
-      - TRACER_REPORTING_PORT=${TRACER_REPORTING_PORT}
-      - SERVICE_STREAM_KEY=${STATE_MANAGER_STREAM_KEY}
-      - SERVICE_CMD_KEY=${STATE_MANAGER_CMD_KEY}
-      - LOGGING_LEVEL=DEBUG
-    cpus: 0.25
-
   matcher:
     image: registry.insight-centre.org/sit/mps/matcher:${IMAGE_TAG}
     command: python /service/matcher/run.py
@@ -183,24 +149,6 @@ services:
       - TRACER_REPORTING_PORT=${TRACER_REPORTING_PORT}
       - SERVICE_STREAM_KEY=${FORWARDER_STREAM_KEY}
       - SERVICE_CMD_KEY=${FORWARDER_CMD_KEY}
-      - LOGGING_LEVEL=DEBUG
-    cpus: 0.25
-
-  graph-builder:
-    image: registry.insight-centre.org/sit/mps/graph-builder:${IMAGE_TAG}
-    command: python /service/graph_builder/run.py
-    depends_on:
-      - redis
-
-    environment:
-      - PYTHONUNBUFFERED=0
-      - REDIS_ADDRESS=${REDIS_ADDRESS}
-      - REDIS_PORT=${REDIS_PORT}
-      - TRACER_REPORTING_HOST=${TRACER_REPORTING_HOST}
-      - TRACER_REPORTING_PORT=${TRACER_REPORTING_PORT}
-      - SERVICE_STREAM_KEY=${GRAPH_BUILDER_STREAM_KEY}
-      - SERVICE_CMD_KEY=${GRAPH_BUILDER_CMD_KEY}
-      - WINDOW_MANAGER_STREAM_KEY=${MATCHER_STREAM_KEY}
       - LOGGING_LEVEL=DEBUG
     cpus: 0.25
 
