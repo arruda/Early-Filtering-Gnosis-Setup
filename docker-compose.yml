@@ -222,7 +222,7 @@ services:
 
   publisher:
     image: registry.insight-centre.org/sit/mps/publisher:${IMAGE_TAG}
-    command: python publisher/run.py --id Pub555 --src rtmp://localhost/live/mystream
+    command: python publisher/run.py --id Publisher01WebCam01 --src rtmp://media-server/live/webcam
     depends_on:
       - redis
 
