@@ -4,7 +4,7 @@ set -e
 VERSION_BUMP_TYPE=$1
 
 echo "Bumping version..."
-bump2version ${VERSION_BUMP_TYPE}
+# bump2version ${VERSION_BUMP_TYPE}
 
 
 echo "Starting tagging process..."
@@ -25,12 +25,12 @@ for SERVICE_NAME in $SERVICE_PROJECT_LIST; do
     NEW_TAG=${IMAGE}':'${NEW_VERSION}
 
     echo "Tagging Docker image: " $LATEST_IMAGE " > " $NEW_TAG
-    # docker tag $LATEST_IMAGE $NEW_TAG
+    docker tag $LATEST_IMAGE $NEW_TAG
     echo "pushing new Docker Image Tag to repository"
-    # docker push $NEW_TAG
+    docker push $NEW_TAG
 
     echo "Creating GIT tag in gitlab for ${SERVICE_NAME}"
-    # python tag_repositories.py ${SIT_TOKEN} ${SERVICE_NAME} ${NEW_VERSION}
+    python tag_repositories.py ${SIT_TOKEN} ${SERVICE_NAME} ${NEW_VERSION}
 
     echo " "
 done
