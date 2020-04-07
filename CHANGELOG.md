@@ -45,4 +45,4 @@ Not much more detail (too many things to just put in here), on future releases w
 
 
 [unreleased]: https://github.com/olivierlacan/keep-a-changelog/compare/v1.0.0...HEAD
-[1.0.0]: releases/tag/v1.0.0
+[1.0.0]: https://gitlab.insight-centre.org/SIT/mps/mps-node/-/tags/v1.0.0
