@@ -11,6 +11,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Pre-processor no longer throws an exception if the media stream is not available when receiving subscriptions.
 - Fix added to execute case insensitive processing of query constraints.
 
+### Benchmark
+- Latency:
+  - Average: 1.6329716175757576 seconds
+  - Standard Deviation: 0.6492308611670065
+
+
 ## [1.0.1] - 2020-04-09
 ### Added
 - Script for tagging versions (Docker and Git) for MPS node.
