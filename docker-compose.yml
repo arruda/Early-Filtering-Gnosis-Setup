@@ -20,6 +20,22 @@ services:
       - 14268:14268
       - 9411:9411
 
+  adaptation-planner:
+    image: registry.insight-centre.org/sit/mps/adaptation-planner:adaptive-scheduler-mocked
+    command: python /service/adaptation_planner/run.py
+    depends_on:
+      - redis
+
+    environment:
+      - PYTHONUNBUFFERED=0
+      - REDIS_ADDRESS=${REDIS_ADDRESS}
+      - REDIS_PORT=${REDIS_PORT}
+      - TRACER_REPORTING_HOST=${TRACER_REPORTING_HOST}
+      - TRACER_REPORTING_PORT=${TRACER_REPORTING_PORT}
+      - SERVICE_STREAM_KEY=${ADAPTATION_PLANNER_STREAM_KEY}
+      - SERVICE_CMD_KEY=${ADAPTATION_PLANNER_CMD_KEY}
+      - LOGGING_LEVEL=DEBUG
+    cpus: 0.25
 
   query-manager:
     image: registry.insight-centre.org/sit/mps/query-manager:${IMAGE_TAG}
@@ -102,8 +118,26 @@ services:
       - LOGGING_LEVEL=DEBUG
     cpus: 0.25
 
+  scheduler:
+    image: registry.insight-centre.org/sit/mps/scheduler:adaptive-scheduler-mocked
+    command: python /service/scheduler/run.py
+    depends_on:
+      - redis
+
+    environment:
+      - PYTHONUNBUFFERED=0
+      - REDIS_ADDRESS=${REDIS_ADDRESS}
+      - REDIS_PORT=${REDIS_PORT}
+      - TRACER_REPORTING_HOST=${TRACER_REPORTING_HOST}
+      - TRACER_REPORTING_PORT=${TRACER_REPORTING_PORT}
+      - SERVICE_STREAM_KEY=${SCHEDULER_STREAM_KEY}
+      - SERVICE_CMD_KEY=${SCHEDULER_CMD_KEY}
+      - EVENT_DISPATCHER_STREAM_KEY=${EVENT_DISPATCHER_STREAM_KEY}
+      - LOGGING_LEVEL=DEBUG
+    cpus: 0.25
+
   event-dispatcher:
-    image: registry.insight-centre.org/sit/mps/event-dispatcher:${IMAGE_TAG}
+    image: registry.insight-centre.org/sit/mps/event-dispatcher:adaptive-scheduler-mocked
     command: python /service/event_dispatcher/run.py
     depends_on:
       - redis
