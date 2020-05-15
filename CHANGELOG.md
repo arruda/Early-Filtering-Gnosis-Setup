@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [1.1.0] - 2020-05-15
 ### Fixed
-- Forwarder now removes the image from the Redis cache once it is processed and dump out.
+- Forwarder now removes the image from the Redis cache after it has been processed and dumped.
 - Webcam now works when accessing User Interface via a remote client.
 - Gitlab CI no more execute build task for tag changes.
 - Better Exception handling in UI Node.js server.
