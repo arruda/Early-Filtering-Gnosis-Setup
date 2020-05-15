@@ -6,6 +6,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.0] - 2020-05-15
+### Fixed
+- Forwarder now removes the image from the Redis cache once it is processed and dump out.
+- Webcam now works when accessing User Interface via a remote client.
+- Gitlab CI no more execute build task for tag changes.
+- Better Exception handling in UI Node.js server.
+
+### Added
+- Gnosis has an updated User Interface v2.
+    - Query Editor now supports templates. One each for Object Detection, VidCEP and Publish/subscribe.
+    - Output displays result in three forms: Image, Graph and Tabular.
+    - Status bar and top information bar updated with new information.
+    - Colour Scheme refreshed (as per NUIG standards).
+- Benchmark Platform Controller now uses PostgreSQL docker container as a DB.
+- Gnosis version change script updated.
+- User Interface now asks for Gnosis node hostname to connect.
+
 ## [1.0.2] - 2020-04-16
 ### Fixed
 - Pre-processor no longer throws an exception if the media stream is not available when receiving subscriptions.
@@ -74,3 +91,4 @@ Not much more detail (too many things to just put in here), on future releases w
 [1.0.0]: https://gitlab.insight-centre.org/SIT/mps/mps-node/-/tags/v1.0.0
 [1.0.1]: https://gitlab.insight-centre.org/SIT/mps/mps-node/-/tags/v1.0.1
 [1.0.2]: https://gitlab.insight-centre.org/SIT/mps/mps-node/-/tags/v1.0.2
+[1.1.0]: https://gitlab.insight-centre.org/SIT/mps/mps-node/-/tags/v1.1.0
