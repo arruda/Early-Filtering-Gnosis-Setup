@@ -23,6 +23,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Gnosis version change script updated.
 - User Interface now asks for Gnosis node hostname to connect.
 
+### Known Issues
+- Gnosis User Interface,
+    - Graph output is currently disabled. It will behave similarly to the image output.
+
 ### Benchmark
 - Latency:
   - Average: 0.977043112908497 seconds
