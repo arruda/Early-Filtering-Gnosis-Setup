@@ -23,6 +23,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Gnosis version change script updated.
 - User Interface now asks for Gnosis node hostname to connect.
 
+### Benchmark
+- Latency:
+  - Average: 0.977043112908497 seconds
+  - Standard Deviation: 0.209773583007953
+
 ## [1.0.2] - 2020-04-16
 ### Fixed
 - Pre-processor no longer throws an exception if the media stream is not available when receiving subscriptions.
