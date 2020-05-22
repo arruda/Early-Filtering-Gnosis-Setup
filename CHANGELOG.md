@@ -6,6 +6,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.1] - 2020-05-22
+### Fixed
+- User Interface now supports high-resolution videos via File Upload. It can also run pre-uploaded videos.
+- Graph output for User Interface is back. 
+- Better Garbage collection: Forwarder now discards plot object created for each frame going outward.
+- Thoroughly tested Tumbling Count Window, Tumbling Time Window and Sliding Count Window.
+
+### Known Issues
+- Sliding Time Window is currently not working.
+
 ## [1.1.0] - 2020-05-15
 ### Fixed
 - Forwarder now removes the image from the Redis cache after it has been processed and dumped.
@@ -101,3 +111,4 @@ Not much more detail (too many things to just put in here), on future releases w
 [1.0.1]: https://gitlab.insight-centre.org/SIT/mps/mps-node/-/tags/v1.0.1
 [1.0.2]: https://gitlab.insight-centre.org/SIT/mps/mps-node/-/tags/v1.0.2
 [1.1.0]: https://gitlab.insight-centre.org/SIT/mps/mps-node/-/tags/v1.1.0
+[1.1.1]: https://gitlab.insight-centre.org/SIT/mps/mps-node/-/tags/v1.1.1
