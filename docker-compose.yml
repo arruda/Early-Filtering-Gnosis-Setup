@@ -177,7 +177,7 @@ services:
     cpus: 0.25
 
   object-detection:
-    image: registry.insight-centre.org/sit/mps/content-extraction-service:${IMAGE_TAG}
+    image: registry.insight-centre.org/sit/mps/content-extraction-service:game-demo
     entrypoint: /content-extractor/entrypoint.sh
     command: python /content-extractor/content_extraction_service/run.py
     depends_on:
