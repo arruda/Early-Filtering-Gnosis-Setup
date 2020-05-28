@@ -188,7 +188,7 @@ services:
     cpus: 0.25
 
   event-dispatcher:
-    image: registry.insight-centre.org/sit/mps/event-dispatcher:${IMAGE_TAG}
+    image: registry.insight-centre.org/sit/mps/event-dispatcher:adaptive-scheduler-mocked
     command: python /service/event_dispatcher/run.py
     depends_on:
       - redis
