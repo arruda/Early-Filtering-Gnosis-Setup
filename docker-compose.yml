@@ -21,7 +21,7 @@ services:
       - 9411:9411
 
   adaptation-knowledge:
-    image: registry.insight-centre.org/sit/mps/adaptation-knowledge:${IMAGE_TAG}
+    image: registry.insight-centre.org/sit/mps/adaptation-knowledge:adaptive-scheduler-mocked
     command: python /service/adaptation_knowledge/run.py
     depends_on:
       - redis
@@ -38,7 +38,7 @@ services:
     cpus: 0.25
 
   adaptation-monitor:
-    image: registry.insight-centre.org/sit/mps/adaptation-monitor:${IMAGE_TAG}
+    image: registry.insight-centre.org/sit/mps/adaptation-monitor:adaptive-scheduler-mocked
     command: python /service/adaptation_monitor/run.py
     depends_on:
       - redis
@@ -55,7 +55,7 @@ services:
     cpus: 0.25
 
   adaptation-analyser:
-    image: registry.insight-centre.org/sit/mps/adaptation-analyser:${IMAGE_TAG}
+    image: registry.insight-centre.org/sit/mps/adaptation-analyser:adaptive-scheduler-mocked
     command: python /service/adaptation_analyser/run.py
     depends_on:
       - redis
@@ -72,7 +72,7 @@ services:
     cpus: 0.25
 
   adaptation-planner:
-    image: registry.insight-centre.org/sit/mps/adaptation-planner:${IMAGE_TAG}
+    image: registry.insight-centre.org/sit/mps/adaptation-planner:adaptive-scheduler-mocked
     command: python /service/adaptation_planner/run.py
     depends_on:
       - redis
@@ -170,7 +170,7 @@ services:
     cpus: 0.25
 
   scheduler:
-    image: registry.insight-centre.org/sit/mps/scheduler:${IMAGE_TAG}
+    image: registry.insight-centre.org/sit/mps/scheduler:adaptive-scheduler-mocked
     command: python /service/scheduler/run.py
     depends_on:
       - redis
