@@ -177,7 +177,7 @@ services:
     cpus: 0.25
 
   object-detection:
-    image: registry.insight-centre.org/sit/mps/content-extraction-service:game-demo
+    image: registry.insight-centre.org/sit/mps/content-extraction-service:${IMAGE_TAG}
     entrypoint: /content-extractor/entrypoint.sh
     command: python /content-extractor/content_extraction_service/run.py
     depends_on:
@@ -191,7 +191,7 @@ services:
       - SERVICE_CMD_KEY=${OBJECT_DETECTION_CMD_KEY}
       - TRACER_REPORTING_HOST=${TRACER_REPORTING_HOST}
       - TRACER_REPORTING_PORT=${TRACER_REPORTING_PORT}
-      - DNN_WEIGHTS_PATH=/content-extractor/content_extraction_service/dnn_model/yolo_coco_v3/yolo.h5
+      - DNN_WEIGHTS_PATH=/content-extractor/content_extraction_service/dnn_model/tiny_yolo_voc_v2/yolov2-tiny-voc.weights
       - DNN_CKPT_FOLDER_PATH=/content-extractor/content_extraction_service/dnn_model/tiny_yolo_voc_v2/ckpt/
       - DNN_INPUT_HEIGHT=416
       - DNN_INPUT_WIDTH=416
