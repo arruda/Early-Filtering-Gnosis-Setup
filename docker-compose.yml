@@ -21,7 +21,7 @@ services:
       - 9411:9411
 
   adaptation-knowledge:
-    image: registry.insight-centre.org/sit/mps/adaptation-knowledge:adaptive-scheduler-mocked
+    image: registry.insight-centre.org/sit/mps/adaptation-knowledge:${IMAGE_TAG}
     command: python /service/adaptation_knowledge/run.py
     depends_on:
       - redis
@@ -38,7 +38,7 @@ services:
     cpus: 0.25
 
   adaptation-monitor:
-    image: registry.insight-centre.org/sit/mps/adaptation-monitor:adaptive-scheduler-mocked
+    image: registry.insight-centre.org/sit/mps/adaptation-monitor:${IMAGE_TAG}
     command: python /service/adaptation_monitor/run.py
     depends_on:
       - redis
@@ -55,7 +55,7 @@ services:
     cpus: 0.25
 
   adaptation-analyser:
-    image: registry.insight-centre.org/sit/mps/adaptation-analyser:adaptive-scheduler-mocked
+    image: registry.insight-centre.org/sit/mps/adaptation-analyser:${IMAGE_TAG}
     command: python /service/adaptation_analyser/run.py
     depends_on:
       - redis
@@ -72,7 +72,7 @@ services:
     cpus: 0.25
 
   adaptation-planner:
-    image: registry.insight-centre.org/sit/mps/adaptation-planner:adaptive-scheduler-mocked
+    image: registry.insight-centre.org/sit/mps/adaptation-planner:${IMAGE_TAG}
     command: python /service/adaptation_planner/run.py
     depends_on:
       - redis
@@ -89,7 +89,7 @@ services:
     cpus: 0.25
 
   query-manager:
-    image: registry.insight-centre.org/sit/mps/query-manager:${IMAGE_TAG}
+    image: registry.insight-centre.org/sit/mps/query-manager:v1.1.0
     command: python /service/query_manager/run.py
     depends_on:
       - redis
@@ -112,7 +112,7 @@ services:
     cpus: 0.25
 
   query-planner:
-    image: registry.insight-centre.org/sit/mps/query-planner:${IMAGE_TAG}
+    image: registry.insight-centre.org/sit/mps/query-planner:v1.1.0
     command: python /service/query_planner/run.py
     depends_on:
       - redis
@@ -132,7 +132,7 @@ services:
 
   preprocessor:
     # runtime: nvidia
-    image: registry.insight-centre.org/sit/mps/preprocessing-service:${IMAGE_TAG}
+    image: registry.insight-centre.org/sit/mps/preprocessing-service:v1.1.0
     command: python /service/preprocessing/run.py
     depends_on:
       - redis
@@ -151,7 +151,7 @@ services:
     cpus: 1
 
   namespace-mapper:
-    image: registry.insight-centre.org/sit/mps/namespace-mapper:${IMAGE_TAG}
+    image: registry.insight-centre.org/sit/mps/namespace-mapper:v1.1.0
     command: python /service/namespace_mapper/run.py
     depends_on:
       - redis
@@ -170,7 +170,7 @@ services:
     cpus: 0.25
 
   scheduler:
-    image: registry.insight-centre.org/sit/mps/scheduler:adaptive-scheduler-mocked
+    image: registry.insight-centre.org/sit/mps/scheduler:${IMAGE_TAG}
     command: python /service/scheduler/run.py
     depends_on:
       - redis
@@ -188,7 +188,7 @@ services:
     cpus: 0.25
 
   event-dispatcher:
-    image: registry.insight-centre.org/sit/mps/event-dispatcher:adaptive-scheduler-mocked
+    image: registry.insight-centre.org/sit/mps/event-dispatcher:${IMAGE_TAG}
     command: python /service/event_dispatcher/run.py
     depends_on:
       - redis
@@ -205,7 +205,7 @@ services:
     cpus: 0.25
 
   window-manager:
-    image: registry.insight-centre.org/sit/mps/window-manager:${IMAGE_TAG}
+    image: registry.insight-centre.org/sit/mps/window-manager:v1.1.0
     command: python /service/window_manager/run.py
     depends_on:
       - redis
@@ -226,7 +226,7 @@ services:
     cpus: 0.25
 
   matcher:
-    image: registry.insight-centre.org/sit/mps/matcher:${IMAGE_TAG}
+    image: registry.insight-centre.org/sit/mps/matcher:v1.1.0
     command: python /service/matcher/run.py
     depends_on:
       - redis
@@ -245,7 +245,7 @@ services:
     cpus: 0.25
 
   forwarder:
-    image: registry.insight-centre.org/sit/mps/forwarder:${IMAGE_TAG}
+    image: registry.insight-centre.org/sit/mps/forwarder:v1.1.0
     command: python /service/forwarder/run.py
     depends_on:
       - redis
@@ -262,7 +262,7 @@ services:
     cpus: 0.25
 
   object-detection:
-    image: registry.insight-centre.org/sit/mps/content-extraction-service:${IMAGE_TAG}
+    image: registry.insight-centre.org/sit/mps/content-extraction-service:v1.1.0
     entrypoint: /content-extractor/entrypoint.sh
     command: python /content-extractor/content_extraction_service/run.py
     depends_on:
@@ -288,7 +288,7 @@ services:
     mem_limit: 1500mb
 
   color-detection:
-    image: registry.insight-centre.org/sit/mps/color-detection-service:${IMAGE_TAG}
+    image: registry.insight-centre.org/sit/mps/color-detection-service:v1.1.0
     command: python /service/color_detection_service/run.py
     depends_on:
       - redis
@@ -306,7 +306,7 @@ services:
     mem_limit: 100mb
 
   publisher:
-    image: registry.insight-centre.org/sit/mps/publisher:${IMAGE_TAG}
+    image: registry.insight-centre.org/sit/mps/publisher:v1.1.0
     command: python publisher/run.py --id Publisher01WebCam01 --src rtmp://media-server/live/webcam
     depends_on:
       - redis
@@ -321,7 +321,7 @@ services:
     cpus: 0.25
 
   client-manager:
-    image: registry.insight-centre.org/sit/mps/client-manager:${IMAGE_TAG}
+    image: registry.insight-centre.org/sit/mps/client-manager:v1.1.0
     command: python /service/client_manager/run.py
     depends_on:
       - redis
