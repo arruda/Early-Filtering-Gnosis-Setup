@@ -5,16 +5,39 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Fixed
+- Fixed link for the Unrelease section to point to link comparing the branch master with the previous version (this link needs to be updated on each release).
+
+### Added
+- Simple Adaptation Engine components added: Adaptation Knowledge, Adaptation Monitor, Adaptation Analyser, Adaptation Planner.
+- Benchmark Plataform Controller allows for a broader range of configurations throught the HTTP API.
+
+### Changed
+- Scheduler and Event Dispatcher updated to work together in with new workflow: Publisher->Event Dispatcher->Scheduler->[Scheduler Plan...]->Window Manager.
+
+
+### Known Issues
+- Adaptation Planner has a mocked available services (and their respective streams key). In a future version this information should be retrived from the Adaptation Knowledge.
+
+### Benchmark
+- Latency:
+  - Average: 0.5297053541666666 seconds
+  - Standard Deviation: 0.14538887928179497
 
 ## [1.1.1] - 2020-05-22
 ### Fixed
 - User Interface now supports high-resolution videos via File Upload. It can also run pre-uploaded videos.
-- Graph output for User Interface is back. 
+- Graph output for User Interface is back.
 - Better Garbage collection: Forwarder now discards plot object created for each frame going outward.
 - Thoroughly tested Tumbling Count Window, Tumbling Time Window and Sliding Count Window.
 
 ### Known Issues
 - Sliding Time Window is currently not working.
+
+### Benchmark
+- Latency:
+  - Average: 1.571153717099567 seconds
+  - Standard Deviation: 0.6757218691234075
 
 ## [1.1.0] - 2020-05-15
 ### Fixed
@@ -106,7 +129,7 @@ Not much more detail (too many things to just put in here), on future releases w
 - Just an example of how to use changelog. -->
 
 
-[unreleased]: https://github.com/olivierlacan/keep-a-changelog/compare/v1.0.0...HEAD
+[unreleased]: https://gitlab.insight-centre.org/SIT/mps/mps-node/compare/v1.1.1...master
 [1.0.0]: https://gitlab.insight-centre.org/SIT/mps/mps-node/-/tags/v1.0.0
 [1.0.1]: https://gitlab.insight-centre.org/SIT/mps/mps-node/-/tags/v1.0.1
 [1.0.2]: https://gitlab.insight-centre.org/SIT/mps/mps-node/-/tags/v1.0.2
