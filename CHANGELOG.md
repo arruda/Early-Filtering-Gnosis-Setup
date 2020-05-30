@@ -5,12 +5,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+## [1.2.0] - 2020-05-29
 ### Fixed
 - Fixed link for the Unrelease section to point to link comparing the branch master with the previous version (this link needs to be updated on each release).
+- User Interface no more breaks when streaming video to the remote Gnosis Node.
 
 ### Added
 - Simple Adaptation Engine components added: Adaptation Knowledge, Adaptation Monitor, Adaptation Analyser, Adaptation Planner.
 - Benchmark Plataform Controller allows for a broader range of configurations throught the HTTP API.
+- Added a flag in the Forwarder to enabled annotation encoding only on request.
 
 ### Changed
 - Scheduler and Event Dispatcher updated to work together in with new workflow: Publisher->Event Dispatcher->Scheduler->[Scheduler Plan...]->Window Manager.
@@ -129,9 +132,10 @@ Not much more detail (too many things to just put in here), on future releases w
 - Just an example of how to use changelog. -->
 
 
-[unreleased]: https://gitlab.insight-centre.org/SIT/mps/mps-node/compare/v1.1.1...master
+[unreleased]: https://gitlab.insight-centre.org/SIT/mps/mps-node/compare/v1.2.0...master
 [1.0.0]: https://gitlab.insight-centre.org/SIT/mps/mps-node/-/tags/v1.0.0
 [1.0.1]: https://gitlab.insight-centre.org/SIT/mps/mps-node/-/tags/v1.0.1
 [1.0.2]: https://gitlab.insight-centre.org/SIT/mps/mps-node/-/tags/v1.0.2
 [1.1.0]: https://gitlab.insight-centre.org/SIT/mps/mps-node/-/tags/v1.1.0
 [1.1.1]: https://gitlab.insight-centre.org/SIT/mps/mps-node/-/tags/v1.1.1
+[1.2.0]: https://gitlab.insight-centre.org/SIT/mps/mps-node/-/tags/v1.2.0
