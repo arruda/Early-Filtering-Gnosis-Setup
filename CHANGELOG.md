@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+- New Object Detection Service, for Tensorflow Object Detection model zoo. To use this on Gnosis node one needs to replace the object-detection configurations to use this service image and configurations instead, this service won't be used otherwise.
+
 ## [1.2.0] - 2020-05-29
 ### Fixed
 - Fixed link for the Unrelease section to point to link comparing the branch master with the previous version (this link needs to be updated on each release).
