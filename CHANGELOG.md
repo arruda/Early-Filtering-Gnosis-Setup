@@ -5,8 +5,27 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [1.3.0] - 2020-06-05
+### Fixed
+- Tumbling Time window and Sliding Time window now works correctly.
+
 ### Added
 - New Object Detection Service, for Tensorflow Object Detection model zoo. To use this on Gnosis node one needs to replace the object-detection configurations to use this service image and configurations instead, this service won't be used otherwise.
+- Added operators for query matching: LEFT, RIGHT, FRONT and BACK.
+    - Demo videos are available at: https://app.asana.com/0/691164837261656/1171330394984121/f
+
+### Changed
+- User Interface is now a one-stop service to access all Gnosis apps.
+    - Current Apps:
+        - Gnosis UI
+        - Game Demo
+        - Gnosis Documentation
+
+### Benchmark
+- Latency:
+  - Average: 0.47882656250000005 seconds
+  - Standard Deviation: 0.10317106821712423
 
 ## [1.2.0] - 2020-05-29
 ### Fixed
@@ -135,10 +154,11 @@ Not much more detail (too many things to just put in here), on future releases w
 - Just an example of how to use changelog. -->
 
 
-[unreleased]: https://gitlab.insight-centre.org/SIT/mps/mps-node/compare/v1.2.0...master
+[unreleased]: https://gitlab.insight-centre.org/SIT/mps/mps-node/compare/v1.3.0...master
 [1.0.0]: https://gitlab.insight-centre.org/SIT/mps/mps-node/-/tags/v1.0.0
 [1.0.1]: https://gitlab.insight-centre.org/SIT/mps/mps-node/-/tags/v1.0.1
 [1.0.2]: https://gitlab.insight-centre.org/SIT/mps/mps-node/-/tags/v1.0.2
 [1.1.0]: https://gitlab.insight-centre.org/SIT/mps/mps-node/-/tags/v1.1.0
 [1.1.1]: https://gitlab.insight-centre.org/SIT/mps/mps-node/-/tags/v1.1.1
 [1.2.0]: https://gitlab.insight-centre.org/SIT/mps/mps-node/-/tags/v1.2.0
+[1.3.0]: https://gitlab.insight-centre.org/SIT/mps/mps-node/-/tags/v1.3.0
