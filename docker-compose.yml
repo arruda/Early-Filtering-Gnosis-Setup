@@ -242,6 +242,26 @@ services:
       - SERVICE_CMD_KEY=${MATCHER_CMD_KEY}
       - FORWARDER_STREAM_KEY=${FORWARDER_STREAM_KEY}
       - FORWARDER_CMD_KEY=${FORWARDER_CMD_KEY}
+      - IMAGE_ANNOTATOR_SERVICE_STREAM_KEY=${IMAGE_ANNOTATOR_SERVICE_STREAM_KEY}
+      - ENABLED_ANNOTATION_ENCODING=${ENABLED_ANNOTATION_ENCODING}
+      - LOGGING_LEVEL=DEBUG
+    cpus: 0.25
+
+  image-annotator-service:
+    image: registry.insight-centre.org/sit/mps/image-annotator-service:${IMAGE_TAG}
+    command: python /service/image_annotator/run.py
+    depends_on:
+      - redis
+
+    environment:
+      - PYTHONUNBUFFERED=0
+      - REDIS_ADDRESS=${REDIS_ADDRESS}
+      - REDIS_PORT=${REDIS_PORT}
+      - TRACER_REPORTING_HOST=${TRACER_REPORTING_HOST}
+      - TRACER_REPORTING_PORT=${TRACER_REPORTING_PORT}
+      - SERVICE_STREAM_KEY=${IMAGE_ANNOTATOR_SERVICE_STREAM_KEY}
+      - SERVICE_CMD_KEY=${IMAGE_ANNOTATOR_SERVICE_CMD_KEY}
+      - FORWARDER_STREAM_KEY=${FORWARDER_STREAM_KEY}
       - LOGGING_LEVEL=DEBUG
     cpus: 0.25
 
@@ -259,7 +279,6 @@ services:
       - TRACER_REPORTING_PORT=${TRACER_REPORTING_PORT}
       - SERVICE_STREAM_KEY=${FORWARDER_STREAM_KEY}
       - SERVICE_CMD_KEY=${FORWARDER_CMD_KEY}
-      - ENABLED_ANNOTATION_ENCODING=${ENABLED_ANNOTATION_ENCODING}
       - LOGGING_LEVEL=DEBUG
     cpus: 0.25
 
@@ -306,21 +325,6 @@ services:
       - LOGGING_LEVEL=DEBUG
     cpus: 0.5
     mem_limit: 100mb
-
-  publisher:
-    image: registry.insight-centre.org/sit/mps/publisher:${IMAGE_TAG}
-    command: python publisher/run.py --id Publisher01WebCam01 --src rtmp://media-server/live/webcam
-    depends_on:
-      - redis
-
-    environment:
-      - PYTHONUNBUFFERED=0
-      - REDIS_ADDRESS=${REDIS_ADDRESS}
-      - REDIS_PORT=${REDIS_PORT}
-      - PUBLISHER_CMD_KEY_TAG=${PUBLISHER_CMD_KEY_TAG}
-      - CLIENT_MANAGER_CMD_KEY=${CLIENT_MANAGER_CMD_KEY}
-      - LOGGING_LEVEL=DEBUG
-    cpus: 0.25
 
   client-manager:
     image: registry.insight-centre.org/sit/mps/client-manager:${IMAGE_TAG}
