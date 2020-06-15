@@ -6,9 +6,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.3.1] - 2020-06-12
+
+### Added
+- Image Annotation Service: new service to add annotation information to the image.
+- Documentation updated with query operators (LEFT, RIGHT, BACK, FRONT) videos.
+
+### Changed
+- Forwarder now has no additional jobs apart from sending event messages to the next destination.
+
+### Known Issues
+- Removal of images from the Redis cache is temporarily disabled. Fix to arrive in the next release.
+
+### Benchmark
+- Latency:
+  - Average: 0.6775986153846153 seconds
+  - Standard Deviation: 0.15260607657382586
+
 ## [1.3.0] - 2020-06-05
 ### Fixed
-- Tumbling Time window and Sliding Time window now works correctly.
+- New Service Image Annotator service added.
 
 ### Added
 - New Object Detection Service, for Tensorflow Object Detection model zoo. To use this on Gnosis node one needs to replace the object-detection configurations to use this service image and configurations instead, this service won't be used otherwise.
@@ -154,7 +171,7 @@ Not much more detail (too many things to just put in here), on future releases w
 - Just an example of how to use changelog. -->
 
 
-[unreleased]: https://gitlab.insight-centre.org/SIT/mps/mps-node/compare/v1.3.0...master
+[unreleased]: https://gitlab.insight-centre.org/SIT/mps/mps-node/compare/v1.3.1...master
 [1.0.0]: https://gitlab.insight-centre.org/SIT/mps/mps-node/-/tags/v1.0.0
 [1.0.1]: https://gitlab.insight-centre.org/SIT/mps/mps-node/-/tags/v1.0.1
 [1.0.2]: https://gitlab.insight-centre.org/SIT/mps/mps-node/-/tags/v1.0.2
@@ -162,3 +179,4 @@ Not much more detail (too many things to just put in here), on future releases w
 [1.1.1]: https://gitlab.insight-centre.org/SIT/mps/mps-node/-/tags/v1.1.1
 [1.2.0]: https://gitlab.insight-centre.org/SIT/mps/mps-node/-/tags/v1.2.0
 [1.3.0]: https://gitlab.insight-centre.org/SIT/mps/mps-node/-/tags/v1.3.0
+[1.3.1]: https://gitlab.insight-centre.org/SIT/mps/mps-node/-/tags/v1.3.1
