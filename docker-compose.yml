@@ -35,7 +35,6 @@ services:
       - SERVICE_STREAM_KEY=${ADAPTATION_KNOWLEDGE_STREAM_KEY}
       - SERVICE_CMD_KEY=${ADAPTATION_KNOWLEDGE_CMD_KEY}
       - LOGGING_LEVEL=DEBUG
-    cpus: 0.25
 
   adaptation-monitor:
     image: registry.insight-centre.org/sit/mps/adaptation-monitor:${IMAGE_TAG}
@@ -52,7 +51,6 @@ services:
       - SERVICE_STREAM_KEY=${ADAPTATION_MONITOR_STREAM_KEY}
       - SERVICE_CMD_KEY=${ADAPTATION_MONITOR_CMD_KEY}
       - LOGGING_LEVEL=DEBUG
-    cpus: 0.25
 
   adaptation-analyser:
     image: registry.insight-centre.org/sit/mps/adaptation-analyser:${IMAGE_TAG}
@@ -69,7 +67,6 @@ services:
       - SERVICE_STREAM_KEY=${ADAPTATION_ANALYSER_STREAM_KEY}
       - SERVICE_CMD_KEY=${ADAPTATION_ANALYSER_CMD_KEY}
       - LOGGING_LEVEL=DEBUG
-    cpus: 0.25
 
   adaptation-planner:
     image: registry.insight-centre.org/sit/mps/adaptation-planner:${IMAGE_TAG}
@@ -86,7 +83,6 @@ services:
       - SERVICE_STREAM_KEY=${ADAPTATION_PLANNER_STREAM_KEY}
       - SERVICE_CMD_KEY=${ADAPTATION_PLANNER_CMD_KEY}
       - LOGGING_LEVEL=DEBUG
-    cpus: 0.25
 
   query-manager:
     image: registry.insight-centre.org/sit/mps/query-manager:${IMAGE_TAG}
@@ -109,7 +105,6 @@ services:
       - FORWARDER_CMD_KEY=${FORWARDER_CMD_KEY}
       - WINDOW_MANAGER_CMD_KEY=${WINDOW_MANAGER_CMD_KEY}
       - LOGGING_LEVEL=DEBUG
-    cpus: 0.25
 
   query-planner:
     image: registry.insight-centre.org/sit/mps/query-planner:${IMAGE_TAG}
@@ -128,10 +123,8 @@ services:
       - EVENT_DISPATCHER_CMD_KEY=${EVENT_DISPATCHER_CMD_KEY}
       - FINAL_DESTINATION_KEY=${FINAL_DESTINATION_KEY}
       - LOGGING_LEVEL=DEBUG
-    cpus: 0.25
 
   preprocessor:
-    # runtime: nvidia
     image: registry.insight-centre.org/sit/mps/preprocessing-service:${IMAGE_TAG}
     command: python /service/preprocessing/run.py
     depends_on:
@@ -148,7 +141,6 @@ services:
       - FFMPEG_BIN=/service/ffmpeg_bin/ffmpeg-linux64-v3.3.1
       - REDIS_EXPIRATION_TIME=100
       - LOGGING_LEVEL=DEBUG
-    cpus: 1
 
   namespace-mapper:
     image: registry.insight-centre.org/sit/mps/namespace-mapper:${IMAGE_TAG}
@@ -167,7 +159,6 @@ services:
       - PREPROCESSOR_CMD_KEY=${PREPROCESSOR_CMD_KEY}
       - EVENT_DISPATCHER_CMD_KEY=${EVENT_DISPATCHER_CMD_KEY}
       - LOGGING_LEVEL=DEBUG
-    cpus: 0.25
 
   scheduler:
     image: registry.insight-centre.org/sit/mps/scheduler:${IMAGE_TAG}
@@ -185,7 +176,6 @@ services:
       - SERVICE_CMD_KEY=${SCHEDULER_CMD_KEY}
       - EVENT_DISPATCHER_STREAM_KEY=${EVENT_DISPATCHER_STREAM_KEY}
       - LOGGING_LEVEL=DEBUG
-    cpus: 0.25
 
   event-dispatcher:
     image: registry.insight-centre.org/sit/mps/event-dispatcher:${IMAGE_TAG}
@@ -202,7 +192,6 @@ services:
       - SERVICE_STREAM_KEY=${EVENT_DISPATCHER_STREAM_KEY}
       - SERVICE_CMD_KEY=${EVENT_DISPATCHER_CMD_KEY}
       - LOGGING_LEVEL=DEBUG
-    cpus: 0.25
 
   window-manager:
     image: registry.insight-centre.org/sit/mps/window-manager:${IMAGE_TAG}
@@ -224,7 +213,6 @@ services:
       - MATCHER_CMD_KEY=${MATCHER_CMD_KEY}
       - EDGE_OPERATORS=${EDGE_OPERATORS}
       - LOGGING_LEVEL=DEBUG
-    cpus: 0.25
 
   matcher:
     image: registry.insight-centre.org/sit/mps/matcher:${IMAGE_TAG}
@@ -245,7 +233,6 @@ services:
       - IMAGE_ANNOTATOR_SERVICE_STREAM_KEY=${IMAGE_ANNOTATOR_SERVICE_STREAM_KEY}
       - ENABLED_ANNOTATION_ENCODING=${ENABLED_ANNOTATION_ENCODING}
       - LOGGING_LEVEL=DEBUG
-    cpus: 0.25
 
   image-annotator-service:
     image: registry.insight-centre.org/sit/mps/image-annotator-service:${IMAGE_TAG}
@@ -263,7 +250,6 @@ services:
       - SERVICE_CMD_KEY=${IMAGE_ANNOTATOR_SERVICE_CMD_KEY}
       - FORWARDER_STREAM_KEY=${FORWARDER_STREAM_KEY}
       - LOGGING_LEVEL=DEBUG
-    cpus: 0.25
 
   forwarder:
     image: registry.insight-centre.org/sit/mps/forwarder:${IMAGE_TAG}
@@ -280,33 +266,31 @@ services:
       - SERVICE_STREAM_KEY=${FORWARDER_STREAM_KEY}
       - SERVICE_CMD_KEY=${FORWARDER_CMD_KEY}
       - LOGGING_LEVEL=DEBUG
-    cpus: 0.25
+
 
   object-detection:
-    image: registry.insight-centre.org/sit/mps/content-extraction-service:${IMAGE_TAG}
-    entrypoint: /content-extractor/entrypoint.sh
-    command: python /content-extractor/content_extraction_service/run.py
+    image: registry.insight-centre.org/sit/mps/object-detection-service:${IMAGE_TAG}
+    command: python /service/object_detection_service/run.py
+
     depends_on:
      - redis
-
     environment:
-      - PYTHONUNBUFFERED=0
       - REDIS_ADDRESS=${REDIS_ADDRESS}
       - REDIS_PORT=${REDIS_PORT}
       - SERVICE_STREAM_KEY=${OBJECT_DETECTION_STREAM_KEY}
       - SERVICE_CMD_KEY=${OBJECT_DETECTION_CMD_KEY}
       - TRACER_REPORTING_HOST=${TRACER_REPORTING_HOST}
       - TRACER_REPORTING_PORT=${TRACER_REPORTING_PORT}
-      - DNN_WEIGHTS_PATH=/content-extractor/content_extraction_service/dnn_model/tiny_yolo_voc_v2/yolov2-tiny-voc.weights
-      - DNN_CKPT_FOLDER_PATH=/content-extractor/content_extraction_service/dnn_model/tiny_yolo_voc_v2/ckpt/
-      - DNN_INPUT_HEIGHT=416
-      - DNN_INPUT_WIDTH=416
-      - DNN_SCORE_THRESHOLD=0.3
-      - DNN_IOU_THRESHOLD=0.3
-      - DNN_TF_GPU_FRACTION=0.25
+      - PYTHONUNBUFFERED=0
+      - CUDA_VISIBLE_DEVICES=-1
+      - GPU_SUPPORT_FLAG=0
+      - MODEL_NAME=ssd_mobilenet_v1_coco_2017_11_17_rt
+      - INPUT_WIDTH=300
+      - INPUT_HEIGHT=300
+      - DETECTION_THRESHOLD=0.5
+      - ALLOW_MEMORY_GROWTH=True
+      - DNN_TF_GPU_FRACTION=0.75
       - LOGGING_LEVEL=DEBUG
-    cpus: 1
-    mem_limit: 1500mb
 
   color-detection:
     image: registry.insight-centre.org/sit/mps/color-detection-service:${IMAGE_TAG}
@@ -323,8 +307,6 @@ services:
       - SERVICE_STREAM_KEY=${COLOR_DETECTION_STREAM_KEY}
       - SERVICE_CMD_KEY=${COLOR_DETECTION_CMD_KEY}
       - LOGGING_LEVEL=DEBUG
-    cpus: 0.5
-    mem_limit: 100mb
 
   client-manager:
     image: registry.insight-centre.org/sit/mps/client-manager:${IMAGE_TAG}
@@ -343,4 +325,3 @@ services:
       - QUERY_MANAGER_CMD_KEY=${QUERY_MANAGER_CMD_KEY}
       - NAMESPACE_MAPPER_CMD_KEY=${NAMESPACE_MAPPER_CMD_KEY}
       - LOGGING_LEVEL=DEBUG
-    cpus: 0.25
