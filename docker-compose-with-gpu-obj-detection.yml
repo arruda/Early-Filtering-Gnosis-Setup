@@ -1,7 +1,15 @@
 version: '2.3'
 services:
-  object-detection:
+  object-detection-ssd-rt:
     runtime: nvidia
     environment:
       - CUDA_VISIBLE_DEVICES=0
       - GPU_SUPPORT_FLAG=1
+      - DNN_TF_GPU_FRACTION=0.3
+
+  object-detection-ssd:
+    runtime: nvidia
+    environment:
+      - CUDA_VISIBLE_DEVICES=0
+      - GPU_SUPPORT_FLAG=1
+      - DNN_TF_GPU_FRACTION=0.3
