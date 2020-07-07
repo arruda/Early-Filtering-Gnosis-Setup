@@ -82,6 +82,7 @@ services:
       - TRACER_REPORTING_PORT=${TRACER_REPORTING_PORT}
       - SERVICE_STREAM_KEY=${ADAPTATION_PLANNER_STREAM_KEY}
       - SERVICE_CMD_KEY=${ADAPTATION_PLANNER_CMD_KEY}
+      - ADAPTATION_PLANNER_MOCKED_OD_STREAM_KEY=${ADAPTATION_PLANNER_MOCKED_OD_STREAM_KEY}
       - LOGGING_LEVEL=DEBUG
 
   query-manager:
@@ -284,29 +285,6 @@ services:
       - CUDA_VISIBLE_DEVICES=-1
       - GPU_SUPPORT_FLAG=0
       - MODEL_NAME=ssd_mobilenet_v1_coco_2017_11_17
-      - INPUT_WIDTH=300
-      - INPUT_HEIGHT=300
-      - DETECTION_THRESHOLD=0.5
-      - ALLOW_MEMORY_GROWTH=True
-      - LOGGING_LEVEL=DEBUG
-
-  object-detection-ssd-rt:
-    image: registry.insight-centre.org/sit/mps/object-detection-service:${IMAGE_TAG}
-    command: python /service/object_detection_service/run.py
-
-    depends_on:
-     - redis
-    environment:
-      - REDIS_ADDRESS=${REDIS_ADDRESS}
-      - REDIS_PORT=${REDIS_PORT}
-      - SERVICE_STREAM_KEY=${OBJECT_DETECTION_SSD_RT_STREAM_KEY}
-      - SERVICE_CMD_KEY=${OBJECT_DETECTION_SSD_RT_CMD_KEY}
-      - TRACER_REPORTING_HOST=${TRACER_REPORTING_HOST}
-      - TRACER_REPORTING_PORT=${TRACER_REPORTING_PORT}
-      - PYTHONUNBUFFERED=0
-      - CUDA_VISIBLE_DEVICES=-1
-      - GPU_SUPPORT_FLAG=0
-      - MODEL_NAME=ssd_mobilenet_v1_coco_2017_11_17_rt
       - INPUT_WIDTH=300
       - INPUT_HEIGHT=300
       - DETECTION_THRESHOLD=0.5
