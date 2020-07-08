@@ -17,7 +17,7 @@ services:
       - PYTHONUNBUFFERED=0
       - CUDA_VISIBLE_DEVICES=0
       - GPU_SUPPORT_FLAG=1
-      - DNN_TF_GPU_FRACTION=0.3
+      - DNN_TF_GPU_FRACTION=1.0
       - MODEL_NAME=ssd_mobilenet_v1_coco_2017_11_17
       - INPUT_WIDTH=300
       - INPUT_HEIGHT=300
