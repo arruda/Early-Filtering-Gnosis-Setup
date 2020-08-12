@@ -15,9 +15,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Removed default resource caps from MPS-node. Now benchmarks will probably jump a bit to a better result but this don't necessarily means that the system is performing better;
 - Complete working Adaptation Engine (only the energy consumption and the queries required service mapping information is mocked);
 - Adaptation Planner Has 4 different adaptation planners for scheduling strategies: simple_fixed, single_best, weighted_random, random;
-- Replaced ObjectDetection service with two services (SSD and SSD-gpu). Both use the ObjectDetection service image, but one has the SSD model running on GPU while the other is on CPU only.
 - Scheduler now execute a scheduling strategy based on the Adaptation Planner details. Right now there are three scheduling strategies: weighted_random, random, single_best;
-
+- Replaced ObjectDetection service with two services (SSD and SSD-gpu). Both use the ObjectDetection service image, but one has the SSD model running on GPU while the other is on CPU only.
+- ObjectDetection service now has option to "hot start" the DNN. (in the setup it will execute once the dnn with a random input array, and ignore the result). This increase the startup time of the service, but removes the problem of not having a "warm" DNN in memory.
 
 ## [1.3.1] - 2020-06-12
 
