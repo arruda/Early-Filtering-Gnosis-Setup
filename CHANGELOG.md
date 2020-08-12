@@ -5,8 +5,19 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [1.4.0] - 2020-08-12
+### Added
+- Benchmark tools has more benchmarking tasks and evaluations;
+- Benchmark Platform Controller has more control on the benchmarks, with options to use custom video datasets in the media-server during benchmarks, as well as overriding the default benchmark tools configurations.
+
 ### Changed
-- Removed default resource caps from MPS-node. Now benchmarks will probably jump a bit to a better result but this don't necessarily means that the system is performing better.
+- Removed default resource caps from MPS-node. Now benchmarks will probably jump a bit to a better result but this don't necessarily means that the system is performing better;
+- Complete working Adaptation Engine (only the energy consumption and the queries required service mapping information is mocked);
+- Adaptation Planner Has 4 different adaptation planners for scheduling strategies: simple_fixed, single_best, weighted_random, random;
+- Replaced ObjectDetection service with two services (SSD and SSD-gpu). Both use the ObjectDetection service image, but one has the SSD model running on GPU while the other is on CPU only.
+- Scheduler now execute a scheduling strategy based on the Adaptation Planner details. Right now there are three scheduling strategies: weighted_random, random, single_best;
+
 
 ## [1.3.1] - 2020-06-12
 
