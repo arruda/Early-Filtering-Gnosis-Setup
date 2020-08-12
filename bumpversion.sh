@@ -18,7 +18,6 @@ NEW_VERSION=v`cat VERSION`
 
 echo 'Tagging containers and git repositories...'
 echo 'Ensure latest version of all images are available...'
-IMAGE_TAG=latest docker-compose pull
 for SERVICE_NAME in $SERVICE_PROJECT_LIST; do
     IMAGE=${DOCKER_REGISTRY}${SERVICE_NAME}
     LATEST_IMAGE=${IMAGE}:latest
