@@ -6,6 +6,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.4.1] - 2020-08-14
+### Added
+- Preprocessor adds frame_index metadata on the published events.
+- Benchmark tools has events subscription and accuracy metrics evaluation, as well as new tasks;
+- Benchmark Platform Controller exports benchmark artefacts as a tar.gz file, which gets available for download at `<BPC_URL>/get_artefacts/<RESULT_ID>`
+
+### Fixed
+- Object Detection SSD CPU uses nvidia runtime to avoid error executing it.
+
+### Known Issues
+- Object Detection SSD CPU can't run without nvidia runtime.
+
 ## [1.4.0] - 2020-08-12
 ### Added
 - Benchmark tools has more benchmarking tasks and evaluations;
@@ -193,3 +205,5 @@ Not much more detail (too many things to just put in here), on future releases w
 [1.2.0]: https://gitlab.insight-centre.org/SIT/mps/mps-node/-/tags/v1.2.0
 [1.3.0]: https://gitlab.insight-centre.org/SIT/mps/mps-node/-/tags/v1.3.0
 [1.3.1]: https://gitlab.insight-centre.org/SIT/mps/mps-node/-/tags/v1.3.1
+[1.4.0]: https://gitlab.insight-centre.org/SIT/mps/mps-node/-/tags/v1.4.0
+[1.4.1]: https://gitlab.insight-centre.org/SIT/mps/mps-node/-/tags/v1.4.1
