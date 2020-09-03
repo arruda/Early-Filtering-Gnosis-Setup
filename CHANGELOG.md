@@ -5,6 +5,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Fixed
+- Adaptation Planner random scheduling planner now is trully just random and is no longer congestion-aware.
+- Better error handling on Benchmark-tools' "task_wait_event_trace_timeout";
+
+### Added
+- Object Detection and Scheduler services use now REDIS_MAX_STREAM_SIZE conf for the stream size limit.
+- Adaptation Monitor will not fire the mocked message for service monitoring if MOCKED_WORKERS_ENERGY_USAGE_DICT conf is set to empty string.
+
+### Known Issues
+- Object Detection SSD CPU can't run without nvidia runtime.
 
 ## [1.4.1] - 2020-08-14
 ### Added
