@@ -5,6 +5,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Fixed
+- Adaptation Planner fixing random scheduler planner to correctly update resource usage for each plan.
+- Benchmark Tools - Better handling for single data point when calculating the avg and std for energy consumption;
+
+### Known Issues
+- Object Detection SSD CPU can't run without nvidia runtime.
+
 ## [1.4.2] - 2020-09-03
 
 ### Fixed
