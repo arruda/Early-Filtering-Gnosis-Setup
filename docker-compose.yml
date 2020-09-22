@@ -269,7 +269,6 @@ services:
       - LOGGING_LEVEL=DEBUG
 
   object-detection-ssd:
-    runtime: nvidia
     image: registry.insight-centre.org/sit/mps/object-detection-service:${IMAGE_TAG}
     command: python /service/object_detection_service/run.py
 
