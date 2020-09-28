@@ -229,15 +229,12 @@ services:
       - TRACER_REPORTING_PORT=${TRACER_REPORTING_PORT}
       - SERVICE_STREAM_KEY=${MATCHER_STREAM_KEY}
       - SERVICE_CMD_KEY=${MATCHER_CMD_KEY}
-      - FORWARDER_STREAM_KEY=${FORWARDER_STREAM_KEY}
-      - FORWARDER_CMD_KEY=${FORWARDER_CMD_KEY}
-      - IMAGE_ANNOTATOR_SERVICE_STREAM_KEY=${IMAGE_ANNOTATOR_SERVICE_STREAM_KEY}
-      - ENABLED_ANNOTATION_ENCODING=${ENABLED_ANNOTATION_ENCODING}
+      - OUTPUT_GENERATOR_STREAM_KEY=${OUTPUT_GENERATOR_STREAM_KEY}
       - LOGGING_LEVEL=DEBUG
 
-  image-annotator-service:
-    image: registry.insight-centre.org/sit/mps/image-annotator-service:${IMAGE_TAG}
-    command: python /service/image_annotator/run.py
+  output-generator:
+    image: registry.insight-centre.org/sit/mps/output-generator:${IMAGE_TAG}
+    command: python /service/output_generator/run.py
     depends_on:
       - redis
 
@@ -247,8 +244,8 @@ services:
       - REDIS_PORT=${REDIS_PORT}
       - TRACER_REPORTING_HOST=${TRACER_REPORTING_HOST}
       - TRACER_REPORTING_PORT=${TRACER_REPORTING_PORT}
-      - SERVICE_STREAM_KEY=${IMAGE_ANNOTATOR_SERVICE_STREAM_KEY}
-      - SERVICE_CMD_KEY=${IMAGE_ANNOTATOR_SERVICE_CMD_KEY}
+      - SERVICE_STREAM_KEY=${OUTPUT_GENERATOR_STREAM_KEY}
+      - SERVICE_CMD_KEY=${OUTPUT_GENERATOR_CMD_KEY}
       - FORWARDER_STREAM_KEY=${FORWARDER_STREAM_KEY}
       - LOGGING_LEVEL=DEBUG
 
