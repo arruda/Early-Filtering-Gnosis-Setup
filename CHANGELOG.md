@@ -6,6 +6,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.0] - 2020-10-12
+### Added
+- New Gnosis Event Processing Language (GnosisEPLv01). Please check the documentation for more info.
+- Output Generator: new service to generate various output formats.
+- Gnosis UI: Object Detection and VidCEP query consoles updated to reflect new GnosisEPL changes.
+- UI supports multiple local videos to be open at a time.
+- UI now performs validation on custom queries for syntax errors.
+
+### Known Issues
+- UI Screen freezes when unpublishing video file.
+- Object Detection SSD CPU can't run without nvidia runtime.
+
+### Benchmark
+- Latency:
+  - Average: 1.4084283928571426 seconds
+  - Standard Deviation: 1.0060161003638728
+
 ## [1.4.3] - 2020-09-10
 ### Fixed
 - Adaptation Planner fixing random scheduler planner to correctly update resource usage for each plan.
@@ -217,7 +234,7 @@ Not much more detail (too many things to just put in here), on future releases w
 - Just an example of how to use changelog. -->
 
 
-[unreleased]: https://gitlab.insight-centre.org/SIT/mps/mps-node/compare/v1.3.1...master
+[unreleased]: https://gitlab.insight-centre.org/SIT/mps/mps-node/compare/v2.0.0...master
 [1.0.0]: https://gitlab.insight-centre.org/SIT/mps/mps-node/-/tags/v1.0.0
 [1.0.1]: https://gitlab.insight-centre.org/SIT/mps/mps-node/-/tags/v1.0.1
 [1.0.2]: https://gitlab.insight-centre.org/SIT/mps/mps-node/-/tags/v1.0.2
@@ -230,3 +247,4 @@ Not much more detail (too many things to just put in here), on future releases w
 [1.4.1]: https://gitlab.insight-centre.org/SIT/mps/mps-node/-/tags/v1.4.1
 [1.4.2]: https://gitlab.insight-centre.org/SIT/mps/mps-node/-/tags/v1.4.2
 [1.4.3]: https://gitlab.insight-centre.org/SIT/mps/mps-node/-/tags/v1.4.3
+[2.0.0]: https://gitlab.insight-centre.org/SIT/mps/mps-node/-/tags/v2.0.0
