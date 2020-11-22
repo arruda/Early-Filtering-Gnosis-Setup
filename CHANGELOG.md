@@ -6,6 +6,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.1.0] - 2020-11-20
+- Query Planner now decides the flow of execution of content services.
+- Documentation updated with GnosisEPL Schema. Add examples.
+- Knowledge Graph Output now displays relationship types. 
+- ViDCEP query console supports new GnosisEPL format.
+
+### Benchmark
+- Latency:
+  - Average: 1.4220741265822785 seconds
+  - Standard Deviation: 1.6735079969352138
+
 ## [2.0.0] - 2020-10-12
 ### Added
 - New Gnosis Event Processing Language (GnosisEPLv01). Please check the documentation for more info.
@@ -234,7 +245,7 @@ Not much more detail (too many things to just put in here), on future releases w
 - Just an example of how to use changelog. -->
 
 
-[unreleased]: https://gitlab.insight-centre.org/SIT/mps/mps-node/compare/v2.0.0...master
+[unreleased]: https://gitlab.insight-centre.org/SIT/mps/mps-node/compare/v2.1.0...master
 [1.0.0]: https://gitlab.insight-centre.org/SIT/mps/mps-node/-/tags/v1.0.0
 [1.0.1]: https://gitlab.insight-centre.org/SIT/mps/mps-node/-/tags/v1.0.1
 [1.0.2]: https://gitlab.insight-centre.org/SIT/mps/mps-node/-/tags/v1.0.2
@@ -248,3 +259,4 @@ Not much more detail (too many things to just put in here), on future releases w
 [1.4.2]: https://gitlab.insight-centre.org/SIT/mps/mps-node/-/tags/v1.4.2
 [1.4.3]: https://gitlab.insight-centre.org/SIT/mps/mps-node/-/tags/v1.4.3
 [2.0.0]: https://gitlab.insight-centre.org/SIT/mps/mps-node/-/tags/v2.0.0
+[2.1.0]: https://gitlab.insight-centre.org/SIT/mps/mps-node/-/tags/v2.1.0
