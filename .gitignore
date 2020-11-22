@@ -115,3 +115,6 @@ dmypy.json
 .pyre/
 
 docker-compose.override.yml
+
+# idea tmp files
+.idea/
