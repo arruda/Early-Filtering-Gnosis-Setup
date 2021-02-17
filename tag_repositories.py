@@ -24,7 +24,7 @@ def get_project_id_by_name(access_token, project_name):
     search_project_url = build_url(
         BASE_GITLAB_URL,
         PROJECTS_ENDPOINT,
-        params={'search': f'SIT/mps/{project_name}'}
+        params={'search': f'SIT/mps/felipe-phd/{project_name}'}
     )
     response = make_request_get(access_token, search_project_url)
     content = response.read().decode('utf8')

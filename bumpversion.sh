@@ -9,9 +9,9 @@ bump2version ${VERSION_BUMP_TYPE}
 
 echo "Starting tagging process..."
 
-DOCKER_REGISTRY="registry.insight-centre.org/sit/mps/"
+DOCKER_REGISTRY="registry.insight-centre.org/sit/mps/felipe-phd"
 
-SERVICE_PROJECT_LIST="object-detection-service adaptation-knowledge adaptation-monitor adaptation-analyser adaptation-planner scheduler client-manager window-manager query-manager content-extraction-service publisher namespace-mapper query-planner event-dispatcher preprocessing-service matcher forwarder color-detection-service user-interface output-generator"
+SERVICE_PROJECT_LIST="object-detection-service adaptation-knowledge adaptation-monitor adaptation-analyser adaptation-planner scheduler client-manager window-manager event-dispatcher preprocessing-service matcher forwarder color-detection-service"
 
 NEW_VERSION=v`cat VERSION`
 

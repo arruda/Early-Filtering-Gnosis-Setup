@@ -20,8 +20,26 @@ services:
       - 14268:14268
       - 9411:9411
 
+  client-manager:
+    image: registry.insight-centre.org/sit/mps/felipe-phd/client-manager:${IMAGE_TAG}
+    command: python /service/client_manager/run.py
+    depends_on:
+      - redis
+
+    environment:
+      - PYTHONUNBUFFERED=0
+      - REDIS_ADDRESS=${REDIS_ADDRESS}
+      - REDIS_PORT=${REDIS_PORT}
+      - TRACER_REPORTING_HOST=${TRACER_REPORTING_HOST}
+      - TRACER_REPORTING_PORT=${TRACER_REPORTING_PORT}
+      - SERVICE_STREAM_KEY=${CLIENT_MANAGER_STREAM_KEY}
+      - SERVICE_CMD_KEY=${CLIENT_MANAGER_CMD_KEY}
+      - QUERY_MANAGER_CMD_KEY=${QUERY_MANAGER_CMD_KEY}
+      - NAMESPACE_MAPPER_CMD_KEY=${NAMESPACE_MAPPER_CMD_KEY}
+      - LOGGING_LEVEL=DEBUG
+
   adaptation-knowledge:
-    image: registry.insight-centre.org/sit/mps/adaptation-knowledge:${IMAGE_TAG}
+    image: registry.insight-centre.org/sit/mps/felipe-phd/adaptation-knowledge:${IMAGE_TAG}
     command: python /service/adaptation_knowledge/run.py
     depends_on:
       - redis
@@ -37,7 +55,7 @@ services:
       - LOGGING_LEVEL=DEBUG
 
   adaptation-monitor:
-    image: registry.insight-centre.org/sit/mps/adaptation-monitor:${IMAGE_TAG}
+    image: registry.insight-centre.org/sit/mps/felipe-phd/adaptation-monitor:${IMAGE_TAG}
     command: python /service/adaptation_monitor/run.py
     depends_on:
       - redis
@@ -53,7 +71,7 @@ services:
       - LOGGING_LEVEL=DEBUG
 
   adaptation-analyser:
-    image: registry.insight-centre.org/sit/mps/adaptation-analyser:${IMAGE_TAG}
+    image: registry.insight-centre.org/sit/mps/felipe-phd/adaptation-analyser:${IMAGE_TAG}
     command: python /service/adaptation_analyser/run.py
     depends_on:
       - redis
@@ -69,7 +87,7 @@ services:
       - LOGGING_LEVEL=DEBUG
 
   adaptation-planner:
-    image: registry.insight-centre.org/sit/mps/adaptation-planner:${IMAGE_TAG}
+    image: registry.insight-centre.org/sit/mps/felipe-phd/adaptation-planner:${IMAGE_TAG}
     command: python /service/adaptation_planner/run.py
     depends_on:
       - redis
@@ -85,49 +103,9 @@ services:
       - MOCKED_OD_STREAM_KEY=${ADAPTATION_PLANNER_MOCKED_OD_STREAM_KEY}
       - LOGGING_LEVEL=DEBUG
 
-  query-manager:
-    image: registry.insight-centre.org/sit/mps/query-manager:${IMAGE_TAG}
-    command: python /service/query_manager/run.py
-    depends_on:
-      - redis
-
-    environment:
-      - PYTHONUNBUFFERED=0
-      - REDIS_ADDRESS=${REDIS_ADDRESS}
-      - REDIS_PORT=${REDIS_PORT}
-      - TRACER_REPORTING_HOST=${TRACER_REPORTING_HOST}
-      - TRACER_REPORTING_PORT=${TRACER_REPORTING_PORT}
-      - SERVICE_STREAM_KEY=${QUERY_MANAGER_STREAM_KEY}
-      - SERVICE_CMD_KEY=${QUERY_MANAGER_CMD_KEY}
-      - NAMESPACE_MAPPER_CMD_KEY=${NAMESPACE_MAPPER_CMD_KEY}
-      - EVENT_DISPATCHER_CMD_KEY=${EVENT_DISPATCHER_CMD_KEY}
-      - MATCHER_CMD_KEY=${MATCHER_CMD_KEY}
-      - OUTPUT_GENERATOR_CMD_KEY=${OUTPUT_GENERATOR_CMD_KEY}
-      - QUERY_PLANNER_CMD_KEY=${QUERY_PLANNER_CMD_KEY}
-      - FORWARDER_CMD_KEY=${FORWARDER_CMD_KEY}
-      - WINDOW_MANAGER_CMD_KEY=${WINDOW_MANAGER_CMD_KEY}
-      - LOGGING_LEVEL=DEBUG
-
-  query-planner:
-    image: registry.insight-centre.org/sit/mps/query-planner:${IMAGE_TAG}
-    command: python /service/query_planner/run.py
-    depends_on:
-      - redis
-
-    environment:
-      - PYTHONUNBUFFERED=0
-      - REDIS_ADDRESS=${REDIS_ADDRESS}
-      - REDIS_PORT=${REDIS_PORT}
-      - TRACER_REPORTING_HOST=${TRACER_REPORTING_HOST}
-      - TRACER_REPORTING_PORT=${TRACER_REPORTING_PORT}
-      - SERVICE_STREAM_KEY=${QUERY_PLANNER_STREAM_KEY}
-      - SERVICE_CMD_KEY=${QUERY_PLANNER_CMD_KEY}
-      - ADAPTATION_MONITOR_CMD_KEY=${ADAPTATION_MONITOR_CMD_KEY}
-      - CONTENT_REGISTRY_DB=${CONTENT_REGISTRY_DB}
-      - LOGGING_LEVEL=DEBUG
 
   preprocessor:
-    image: registry.insight-centre.org/sit/mps/preprocessing-service:${IMAGE_TAG}
+    image: registry.insight-centre.org/sit/mps/felipe-phd/preprocessing-service:${IMAGE_TAG}
     command: python /service/preprocessing/run.py
     depends_on:
       - redis
@@ -145,7 +123,7 @@ services:
       - LOGGING_LEVEL=DEBUG
 
   namespace-mapper:
-    image: registry.insight-centre.org/sit/mps/namespace-mapper:${IMAGE_TAG}
+    image: registry.insight-centre.org/sit/mps/felipe-phd/namespace-mapper:${IMAGE_TAG}
     command: python /service/namespace_mapper/run.py
     depends_on:
       - redis
@@ -163,7 +141,7 @@ services:
       - LOGGING_LEVEL=DEBUG
 
   scheduler:
-    image: registry.insight-centre.org/sit/mps/scheduler:${IMAGE_TAG}
+    image: registry.insight-centre.org/sit/mps/felipe-phd/scheduler:${IMAGE_TAG}
     command: python /service/scheduler/run.py
     depends_on:
       - redis
@@ -180,7 +158,7 @@ services:
       - LOGGING_LEVEL=DEBUG
 
   event-dispatcher:
-    image: registry.insight-centre.org/sit/mps/event-dispatcher:${IMAGE_TAG}
+    image: registry.insight-centre.org/sit/mps/felipe-phd/event-dispatcher:${IMAGE_TAG}
     command: python /service/event_dispatcher/run.py
     depends_on:
       - redis
@@ -195,62 +173,8 @@ services:
       - SERVICE_CMD_KEY=${EVENT_DISPATCHER_CMD_KEY}
       - LOGGING_LEVEL=DEBUG
 
-  window-manager:
-    image: registry.insight-centre.org/sit/mps/window-manager:${IMAGE_TAG}
-    command: python /service/window_manager/run.py
-    depends_on:
-      - redis
-
-    environment:
-      - PYTHONUNBUFFERED=0
-      - REDIS_ADDRESS=${REDIS_ADDRESS}
-      - REDIS_PORT=${REDIS_PORT}
-      - TRACER_REPORTING_HOST=${TRACER_REPORTING_HOST}
-      - TRACER_REPORTING_PORT=${TRACER_REPORTING_PORT}
-      - SERVICE_STREAM_KEY=${WINDOW_MANAGER_STREAM_KEY}
-      - SERVICE_CMD_KEY=${WINDOW_MANAGER_CMD_KEY}
-      - STATE_MANAGER_CMD_KEY=${STATE_MANAGER_CMD_KEY}
-      - STATE_MANAGER_STREAM_KEY=${STATE_MANAGER_STREAM_KEY}
-      - MATCHER_STREAM_KEY=${MATCHER_STREAM_KEY}
-      - MATCHER_CMD_KEY=${MATCHER_CMD_KEY}
-      - LOGGING_LEVEL=DEBUG
-
-  matcher:
-    image: registry.insight-centre.org/sit/mps/matcher:${IMAGE_TAG}
-    command: python /service/matcher/run.py
-    depends_on:
-      - redis
-
-    environment:
-      - PYTHONUNBUFFERED=0
-      - REDIS_ADDRESS=${REDIS_ADDRESS}
-      - REDIS_PORT=${REDIS_PORT}
-      - TRACER_REPORTING_HOST=${TRACER_REPORTING_HOST}
-      - TRACER_REPORTING_PORT=${TRACER_REPORTING_PORT}
-      - SERVICE_STREAM_KEY=${MATCHER_STREAM_KEY}
-      - SERVICE_CMD_KEY=${MATCHER_CMD_KEY}
-      - OUTPUT_GENERATOR_STREAM_KEY=${OUTPUT_GENERATOR_STREAM_KEY}
-      - LOGGING_LEVEL=DEBUG
-
-  output-generator:
-    image: registry.insight-centre.org/sit/mps/output-generator:${IMAGE_TAG}
-    command: python /service/output_generator/run.py
-    depends_on:
-      - redis
-
-    environment:
-      - PYTHONUNBUFFERED=0
-      - REDIS_ADDRESS=${REDIS_ADDRESS}
-      - REDIS_PORT=${REDIS_PORT}
-      - TRACER_REPORTING_HOST=${TRACER_REPORTING_HOST}
-      - TRACER_REPORTING_PORT=${TRACER_REPORTING_PORT}
-      - SERVICE_STREAM_KEY=${OUTPUT_GENERATOR_STREAM_KEY}
-      - SERVICE_CMD_KEY=${OUTPUT_GENERATOR_CMD_KEY}
-      - FORWARDER_STREAM_KEY=${FORWARDER_STREAM_KEY}
-      - LOGGING_LEVEL=DEBUG
-
   forwarder:
-    image: registry.insight-centre.org/sit/mps/forwarder:${IMAGE_TAG}
+    image: registry.insight-centre.org/sit/mps/felipe-phd/forwarder:${IMAGE_TAG}
     command: python /service/forwarder/run.py
     depends_on:
       - redis
@@ -263,61 +187,4 @@ services:
       - TRACER_REPORTING_PORT=${TRACER_REPORTING_PORT}
       - SERVICE_STREAM_KEY=${FORWARDER_STREAM_KEY}
       - SERVICE_CMD_KEY=${FORWARDER_CMD_KEY}
-      - LOGGING_LEVEL=DEBUG
-
-  object-detection-ssd:
-    image: registry.insight-centre.org/sit/mps/object-detection-service:${IMAGE_TAG}
-    command: python /service/object_detection_service/run.py
-
-    depends_on:
-     - redis
-    environment:
-      - REDIS_ADDRESS=${REDIS_ADDRESS}
-      - REDIS_PORT=${REDIS_PORT}
-      - SERVICE_STREAM_KEY=${OBJECT_DETECTION_SSD_STREAM_KEY}
-      - SERVICE_CMD_KEY=${OBJECT_DETECTION_SSD_CMD_KEY}
-      - TRACER_REPORTING_HOST=${TRACER_REPORTING_HOST}
-      - TRACER_REPORTING_PORT=${TRACER_REPORTING_PORT}
-      - PYTHONUNBUFFERED=0
-      - CUDA_VISIBLE_DEVICES=-1
-      - GPU_SUPPORT_FLAG=0
-      - MODEL_NAME=ssd_mobilenet_v1_coco_2017_11_17
-      - INPUT_WIDTH=300
-      - INPUT_HEIGHT=300
-      - DETECTION_THRESHOLD=0.5
-      - ALLOW_MEMORY_GROWTH=True
-      - LOGGING_LEVEL=DEBUG
-
-  color-detection:
-    image: registry.insight-centre.org/sit/mps/color-detection-service:${IMAGE_TAG}
-    command: python /service/color_detection_service/run.py
-    depends_on:
-      - redis
-
-    environment:
-      - PYTHONUNBUFFERED=0
-      - REDIS_ADDRESS=${REDIS_ADDRESS}
-      - REDIS_PORT=${REDIS_PORT}
-      - TRACER_REPORTING_HOST=${TRACER_REPORTING_HOST}
-      - TRACER_REPORTING_PORT=${TRACER_REPORTING_PORT}
-      - SERVICE_STREAM_KEY=${COLOR_DETECTION_STREAM_KEY}
-      - SERVICE_CMD_KEY=${COLOR_DETECTION_CMD_KEY}
-      - LOGGING_LEVEL=DEBUG
-
-  client-manager:
-    image: registry.insight-centre.org/sit/mps/client-manager:${IMAGE_TAG}
-    command: python /service/client_manager/run.py
-    depends_on:
-      - redis
-
-    environment:
-      - PYTHONUNBUFFERED=0
-      - REDIS_ADDRESS=${REDIS_ADDRESS}
-      - REDIS_PORT=${REDIS_PORT}
-      - TRACER_REPORTING_HOST=${TRACER_REPORTING_HOST}
-      - TRACER_REPORTING_PORT=${TRACER_REPORTING_PORT}
-      - SERVICE_STREAM_KEY=${CLIENT_MANAGER_STREAM_KEY}
-      - SERVICE_CMD_KEY=${CLIENT_MANAGER_CMD_KEY}
-      - QUERY_MANAGER_CMD_KEY=${QUERY_MANAGER_CMD_KEY}
-      - NAMESPACE_MAPPER_CMD_KEY=${NAMESPACE_MAPPER_CMD_KEY}
       - LOGGING_LEVEL=DEBUG
