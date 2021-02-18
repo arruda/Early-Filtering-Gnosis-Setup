@@ -153,18 +153,18 @@ services:
       - SERVICE_CMD_KEY=${EVENT_DISPATCHER_CMD_KEY}
       - LOGGING_LEVEL=DEBUG
 
-  forwarder:
-    image: registry.insight-centre.org/sit/mps/felipe-phd/forwarder:${IMAGE_TAG}
-    command: python /service/forwarder/run.py
-    depends_on:
-      - redis
+  # forwarder:
+  #   image: registry.insight-centre.org/sit/mps/felipe-phd/forwarder:${IMAGE_TAG}
+  #   command: python /service/forwarder/run.py
+  #   depends_on:
+  #     - redis
 
-    environment:
-      - PYTHONUNBUFFERED=0
-      - REDIS_ADDRESS=${REDIS_ADDRESS}
-      - REDIS_PORT=${REDIS_PORT}
-      - TRACER_REPORTING_HOST=${TRACER_REPORTING_HOST}
-      - TRACER_REPORTING_PORT=${TRACER_REPORTING_PORT}
-      - SERVICE_STREAM_KEY=${FORWARDER_STREAM_KEY}
-      - SERVICE_CMD_KEY=${FORWARDER_CMD_KEY}
-      - LOGGING_LEVEL=DEBUG
+  #   environment:
+  #     - PYTHONUNBUFFERED=0
+  #     - REDIS_ADDRESS=${REDIS_ADDRESS}
+  #     - REDIS_PORT=${REDIS_PORT}
+  #     - TRACER_REPORTING_HOST=${TRACER_REPORTING_HOST}
+  #     - TRACER_REPORTING_PORT=${TRACER_REPORTING_PORT}
+  #     - SERVICE_STREAM_KEY=${FORWARDER_STREAM_KEY}
+  #     - SERVICE_CMD_KEY=${FORWARDER_CMD_KEY}
+  #     - LOGGING_LEVEL=DEBUG
