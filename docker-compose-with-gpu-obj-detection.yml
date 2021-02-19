@@ -2,7 +2,7 @@ version: '2.3'
 services:
   object-detection-ssd-gpu:
     runtime: nvidia
-    image: registry.insight-centre.org/sit/mps/object-detection-service:${IMAGE_TAG}-gpu
+    image: registry.insight-centre.org/sit/mps/felipe-phd/object-detection-service:${IMAGE_TAG}-gpu
     command: python /service/object_detection_service/run.py
 
     depends_on:
@@ -26,7 +26,7 @@ services:
       - LOGGING_LEVEL=DEBUG
 
   object-detection-ssd:
-    image: registry.insight-centre.org/sit/mps/object-detection-service:${IMAGE_TAG}
+    image: registry.insight-centre.org/sit/mps/felipe-phd/object-detection-service:${IMAGE_TAG}
     command: python /service/object_detection_service/run.py
 
     depends_on:

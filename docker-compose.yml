@@ -37,6 +37,7 @@ services:
       - PREPROCESSOR_CMD_KEY=${PREPROCESSOR_CMD_KEY}
       - EVENT_DISPATCHER_CMD_KEY=${EVENT_DISPATCHER_CMD_KEY}
       - ADAPTATION_MONITOR_CMD_KEY=${ADAPTATION_MONITOR_CMD_KEY}
+      - WINDOW_MANAGER_CMD_KEY=${WINDOW_MANAGER_CMD_KEY}
       - MOCKED_SERVICE_REGISTRY=${MOCKED_SERVICE_REGISTRY}
       - LOGGING_LEVEL=DEBUG
 
@@ -157,6 +158,23 @@ services:
       - EVENT_DISPATCHER_STREAM_KEY=${EVENT_DISPATCHER_STREAM_KEY}
       - LOGGING_LEVEL=DEBUG
 
+  window-manager:
+    image: registry.insight-centre.org/sit/mps/felipe-phd/window-manager:${IMAGE_TAG}
+    command: python /service/window_manager/run.py
+    depends_on:
+      - redis
+
+    environment:
+      - PYTHONUNBUFFERED=0
+      - REDIS_ADDRESS=${REDIS_ADDRESS}
+      - REDIS_PORT=${REDIS_PORT}
+      - TRACER_REPORTING_HOST=${TRACER_REPORTING_HOST}
+      - TRACER_REPORTING_PORT=${TRACER_REPORTING_PORT}
+      - SERVICE_STREAM_KEY=${WINDOW_MANAGER_STREAM_KEY}
+      - SERVICE_CMD_KEY=${WINDOW_MANAGER_CMD_KEY}
+      - MATCHER_STREAM_KEY=${MATCHER_STREAM_KEY}
+      - EVENT_DISPATCHER_STREAM_KEY=${EVENT_DISPATCHER_STREAM_KEY}
+      - LOGGING_LEVEL=DEBUG
 
   # forwarder:
   #   image: registry.insight-centre.org/sit/mps/felipe-phd/forwarder:${IMAGE_TAG}
