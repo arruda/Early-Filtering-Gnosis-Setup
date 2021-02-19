@@ -40,7 +40,6 @@ services:
       - MOCKED_SERVICE_REGISTRY=${MOCKED_SERVICE_REGISTRY}
       - LOGGING_LEVEL=DEBUG
 
-
   adaptation-knowledge:
     image: registry.insight-centre.org/sit/mps/felipe-phd/adaptation-knowledge:${IMAGE_TAG}
     command: python /service/adaptation_knowledge/run.py
@@ -107,7 +106,6 @@ services:
       - MOCKED_OD_STREAM_KEY=${ADAPTATION_PLANNER_MOCKED_OD_STREAM_KEY}
       - LOGGING_LEVEL=DEBUG
 
-
   preprocessor:
     image: registry.insight-centre.org/sit/mps/felipe-phd/preprocessing-service:${IMAGE_TAG}
     command: python /service/preprocessing/run.py
@@ -124,6 +122,22 @@ services:
       - SERVICE_CMD_KEY=${PREPROCESSOR_CMD_KEY}
       - FFMPEG_BIN=/service/ffmpeg_bin/ffmpeg-linux64-v3.3.1
       - REDIS_EXPIRATION_TIME=100
+      - LOGGING_LEVEL=DEBUG
+
+  event-dispatcher:
+    image: registry.insight-centre.org/sit/mps/felipe-phd/event-dispatcher:${IMAGE_TAG}
+    command: python /service/event_dispatcher/run.py
+    depends_on:
+      - redis
+
+    environment:
+      - PYTHONUNBUFFERED=0
+      - REDIS_ADDRESS=${REDIS_ADDRESS}
+      - REDIS_PORT=${REDIS_PORT}
+      - TRACER_REPORTING_HOST=${TRACER_REPORTING_HOST}
+      - TRACER_REPORTING_PORT=${TRACER_REPORTING_PORT}
+      - SERVICE_STREAM_KEY=${EVENT_DISPATCHER_STREAM_KEY}
+      - SERVICE_CMD_KEY=${EVENT_DISPATCHER_CMD_KEY}
       - LOGGING_LEVEL=DEBUG
 
   scheduler:
@@ -143,21 +157,6 @@ services:
       - EVENT_DISPATCHER_STREAM_KEY=${EVENT_DISPATCHER_STREAM_KEY}
       - LOGGING_LEVEL=DEBUG
 
-  event-dispatcher:
-    image: registry.insight-centre.org/sit/mps/felipe-phd/event-dispatcher:${IMAGE_TAG}
-    command: python /service/event_dispatcher/run.py
-    depends_on:
-      - redis
-
-    environment:
-      - PYTHONUNBUFFERED=0
-      - REDIS_ADDRESS=${REDIS_ADDRESS}
-      - REDIS_PORT=${REDIS_PORT}
-      - TRACER_REPORTING_HOST=${TRACER_REPORTING_HOST}
-      - TRACER_REPORTING_PORT=${TRACER_REPORTING_PORT}
-      - SERVICE_STREAM_KEY=${EVENT_DISPATCHER_STREAM_KEY}
-      - SERVICE_CMD_KEY=${EVENT_DISPATCHER_CMD_KEY}
-      - LOGGING_LEVEL=DEBUG
 
   # forwarder:
   #   image: registry.insight-centre.org/sit/mps/felipe-phd/forwarder:${IMAGE_TAG}
