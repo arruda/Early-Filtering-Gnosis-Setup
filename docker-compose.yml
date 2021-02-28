@@ -20,6 +20,23 @@ services:
       - 14268:14268
       - 9411:9411
 
+  service-registry:
+    image: registry.insight-centre.org/sit/mps/felipe-phd/service-registry:${IMAGE_TAG}
+    command: python /service/service_registry/run.py
+    depends_on:
+      - redis
+
+    environment:
+      - PYTHONUNBUFFERED=0
+      - REDIS_ADDRESS=${REDIS_ADDRESS}
+      - REDIS_PORT=${REDIS_PORT}
+      - TRACER_REPORTING_HOST=${TRACER_REPORTING_HOST}
+      - TRACER_REPORTING_PORT=${TRACER_REPORTING_PORT}
+      - SERVICE_STREAM_KEY=${SERVICE_REGISTRY_STREAM_KEY}
+      - SERVICE_CMD_KEY=${SERVICE_REGISTRY_CMD_KEY}
+      - CLIENT_MANAGER_CMD_KEY=${CLIENT_MANAGER_CMD_KEY}
+      - LOGGING_LEVEL=DEBUG
+
   client-manager:
     image: registry.insight-centre.org/sit/mps/felipe-phd/client-manager:${IMAGE_TAG}
     command: python /service/client_manager/run.py
@@ -72,7 +89,6 @@ services:
       - TRACER_REPORTING_HOST=${TRACER_REPORTING_HOST}
       - TRACER_REPORTING_PORT=${TRACER_REPORTING_PORT}
       - SERVICE_STREAM_KEY=${ADAPTATION_MONITOR_STREAM_KEY}
-      - MOCKED_WORKERS_ENERGY_USAGE_DICT=${MOCKED_WORKERS_ENERGY_USAGE_DICT}
       - SERVICE_CMD_KEY=${ADAPTATION_MONITOR_CMD_KEY}
       - LOGGING_LEVEL=DEBUG
 
@@ -209,3 +225,4 @@ services:
       - SERVICE_STREAM_KEY=${FORWARDER_STREAM_KEY}
       - SERVICE_CMD_KEY=${FORWARDER_CMD_KEY}
       - LOGGING_LEVEL=DEBUG
+
