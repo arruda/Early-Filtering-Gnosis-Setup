@@ -4,7 +4,7 @@ set -e
 VERSION_BUMP_TYPE=$1
 
 echo "Bumping version..."
-# bump2version ${VERSION_BUMP_TYPE}
+bump2version ${VERSION_BUMP_TYPE}
 
 
 echo "Starting tagging process..."
