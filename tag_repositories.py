@@ -9,6 +9,7 @@ import sys
 
 BASE_GITLAB_URL = 'https://gitlab.insight-centre.org/api/v4/'
 PROJECTS_ENDPOINT = 'projects'
+GROUP_ENDPOINT = 'groups/SIT%2Fmps%2Ffelipe-phd/search'
 REPOSITORY_TAGS_ENDPOINT = 'projects/{project_id}/repository/tags'
 
 
@@ -23,8 +24,8 @@ def build_url(base, endpoint, params=None):
 def get_project_id_by_name(access_token, project_name):
     search_project_url = build_url(
         BASE_GITLAB_URL,
-        PROJECTS_ENDPOINT,
-        params={'search': f'SIT/mps/felipe-phd/{project_name}'}
+        GROUP_ENDPOINT,
+        params={'search': f'{project_name}', 'scope': 'projects'}
     )
     response = make_request_get(access_token, search_project_url)
     content = response.read().decode('utf8')

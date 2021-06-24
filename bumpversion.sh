@@ -29,7 +29,7 @@ for SERVICE_NAME in $SERVICE_PROJECT_LIST; do
         IMAGE_AND_TAG=${IMAGE}:master-gpu
         NEW_TAG=${IMAGE}':'${NEW_VERSION}'-gpu'
     else
-        echo "Creating GIT tag in gitlab for ${SERVICE_NAME} ${NEW_VERSION}"
+        echo "Creating GIT tag in gitlab for ${SERVICE_NAME} with ${NEW_VERSION}"
         python tag_repositories.py ${SIT_TOKEN} ${SERVICE_NAME} ${NEW_VERSION}
     fi
 
