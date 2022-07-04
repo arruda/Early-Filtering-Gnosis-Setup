@@ -7,13 +7,11 @@ services:
 
     depends_on:
      - redis
-     - service-registry
     environment:
       - REDIS_ADDRESS=${REDIS_ADDRESS}
       - REDIS_PORT=${REDIS_PORT}
       - SERVICE_STREAM_KEY=${OBJECT_DETECTION_SSD_GPU_STREAM_KEY}
-      - SERVICE_CMD_KEY=${OBJECT_DETECTION_SSD_GPU_CMD_KEY}
-      - SERVICE_REGISTRY_CMD_KEY=${SERVICE_REGISTRY_CMD_KEY}
+      - PUB_EVENT_TYPE_SERVICE_WORKER_ANNOUNCED=${EVENT_TYPE_SERVICE_WORKER_ANNOUNCED}
       - SERVICE_DETAILS_SERVICE_TYPE=ObjectDetection
       - SERVICE_DETAILS_CONTENT_TYPES=node_attribute:bounding_box,node_attribute:label,node_attribute:confidence,node:person,node:car
       - SERVICE_DETAILS_STREAM_KEY=${OBJECT_DETECTION_SSD_GPU_STREAM_KEY}
@@ -32,7 +30,9 @@ services:
       - INPUT_HEIGHT=300
       - DETECTION_THRESHOLD=0.5
       - ALLOW_MEMORY_GROWTH=True
-      - LOGGING_LEVEL=DEBUG
+      - LOGGING_LEVEL=${LOGGING_LEVEL}
+      - SERVICE_REGISTRY_CMD_KEY=dontneed
+      - SERVICE_CMD_KEY=dontneed
 
   object-detection-ssd:
     image: registry.insight-centre.org/sit/mps/felipe-phd/object-detection-service:${IMAGE_TAG}
@@ -40,13 +40,11 @@ services:
 
     depends_on:
      - redis
-     - service-registry
     environment:
       - REDIS_ADDRESS=${REDIS_ADDRESS}
       - REDIS_PORT=${REDIS_PORT}
       - SERVICE_STREAM_KEY=${OBJECT_DETECTION_SSD_STREAM_KEY}
-      - SERVICE_CMD_KEY=${OBJECT_DETECTION_SSD_CMD_KEY}
-      - SERVICE_REGISTRY_CMD_KEY=${SERVICE_REGISTRY_CMD_KEY}
+      - PUB_EVENT_TYPE_SERVICE_WORKER_ANNOUNCED=${EVENT_TYPE_SERVICE_WORKER_ANNOUNCED}
       - SERVICE_DETAILS_SERVICE_TYPE=ObjectDetection
       - SERVICE_DETAILS_CONTENT_TYPES=node_attribute:bounding_box,node_attribute:label,node_attribute:confidence,node:person,node:car
       - SERVICE_DETAILS_STREAM_KEY=${OBJECT_DETECTION_SSD_STREAM_KEY}
@@ -64,4 +62,6 @@ services:
       - INPUT_HEIGHT=300
       - DETECTION_THRESHOLD=0.5
       - ALLOW_MEMORY_GROWTH=True
-      - LOGGING_LEVEL=DEBUG
+      - LOGGING_LEVEL=${LOGGING_LEVEL}
+      - SERVICE_REGISTRY_CMD_KEY=dontneed
+      - SERVICE_CMD_KEY=dontneed
