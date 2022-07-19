@@ -11,7 +11,7 @@ echo "Starting tagging process..."
 
 DOCKER_REGISTRY="registry.insight-centre.org/sit/mps/felipe-phd/"
 
-SERVICE_PROJECT_LIST="window-manager service-registry adaptation-knowledge event-dispatcher matcher scheduler object-detection-service object-detection-service-gpu adaptation-planner preprocessing-service adaptation-analyser adaptation-monitor client-manager forwarder"
+SERVICE_PROJECT_LIST="adaptation-analyser adaptation-monitor adaptation-planner client-manager event-dispatcher forwarder matcher object-detection-ssd-gpu object-detection-ssd preprocessor scheduler window-manager"
 
 NEW_VERSION=v`cat VERSION`
 
