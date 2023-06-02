@@ -4,7 +4,7 @@ services:
     image: redislabs/redisgraph:2.2.15
     ports:
       - "6379:6379"
-    mem_limit: 4gb
+    mem_limit: 8gb
     environment:
       - PYTHONUNBUFFERED=0
 
@@ -285,3 +285,44 @@ services:
       - LISTEN_EVENT_TYPE_QUERY_REMOVED=${EVENT_TYPE_QUERY_REMOVED}
       - LOGGING_LEVEL=${LOGGING_LEVEL}
 
+  videostreamforwarder:
+    image: registry.insight-centre.org/sit/mps/felipe-phd/videostreamforwarder:${IMAGE_TAG}
+    command: python /service/videostreamforwarder/run.py
+    depends_on:
+      - redis
+
+    environment:
+      - PYTHONUNBUFFERED=0
+      - REDIS_ADDRESS=${REDIS_ADDRESS}
+      - REDIS_PORT=${REDIS_PORT}
+      - TRACER_REPORTING_HOST=${TRACER_REPORTING_HOST}
+      - TRACER_REPORTING_PORT=${TRACER_REPORTING_PORT}
+      - SERVICE_STREAM_KEY=${VIDEOSTREAMFORWARDER_STREAM_KEY}
+      - LISTEN_EVENT_TYPE_QUERY_CREATED=${EVENT_TYPE_QUERY_CREATED}
+      - LISTEN_EVENT_TYPE_QUERY_REMOVED=${EVENT_TYPE_QUERY_REMOVED}
+      - SUPPORTED_VIDEO_OUTPUT_TYPES=${SUPPORTED_VIDEO_OUTPUT_TYPES}
+      - OUPUT_MEDIA_SERVER_URL=${OUPUT_MEDIA_SERVER_URL}
+      - LOGGING_LEVEL=${LOGGING_LEVEL}
+
+  access-point:
+    image: registry.insight-centre.org/sit/mps/felipe-phd/access-point:master
+    command: python /service/access_point/run.py
+    depends_on:
+      - redis
+    ports:
+      - "8000:8000"
+
+    environment:
+      - PYTHONUNBUFFERED=0
+      - REDIS_ADDRESS=${REDIS_ADDRESS}
+      - REDIS_PORT=${REDIS_PORT}
+      - TRACER_REPORTING_HOST=${TRACER_REPORTING_HOST}
+      - TRACER_REPORTING_PORT=${TRACER_REPORTING_PORT}
+      - AP_WEBSOCKET_HOST=${AP_WEBSOCKET_HOST}
+      - SERVICE_STREAM_KEY=${ACCESS_POINT_STREAM_KEY}
+      - LISTEN_EVENT_TYPE_QUERY_CREATED=${EVENT_TYPE_QUERY_CREATED}
+      - LISTEN_EVENT_TYPE_PUBLISHER_CREATED=${EVENT_TYPE_PUBLISHER_CREATED}
+      - PUB_EVENT_TYPE_QUERY_RECEIVED=${EVENT_TYPE_QUERY_RECEIVED}
+      - PUB_EVENT_TYPE_PUBLISHER_CREATED=${EVENT_TYPE_PUBLISHER_CREATED}
+      - SUBSCRIBER_MEDIA_SERVER_URL=${SUBSCRIBER_MEDIA_SERVER_URL}
+      - LOGGING_LEVEL=${LOGGING_LEVEL}
