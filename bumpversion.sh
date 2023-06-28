@@ -11,7 +11,7 @@ echo "Starting tagging process..."
 
 DOCKER_REGISTRY="registry.insight-centre.org/sit/mps/felipe-phd/"
 
-SERVICE_PROJECT_LIST="adaptation-analyser adaptation-monitor adaptation-planner client-manager event-dispatcher forwarder matcher object-detection-service-gpu object-detection-service preprocessing-service scheduler window-manager"
+SERVICE_PROJECT_LIST="access-point adaptation-analyser adaptation-monitor adaptation-planner client-manager event-dispatcher forwarder matcher object-detection-service-gpu object-detection-service preprocessing-service query-planner scheduler slr-worker-ranking videostreamforwarder window-manager worker-profile-rating"
 
 NEW_VERSION=v`cat VERSION`
 
@@ -20,13 +20,13 @@ echo 'Tagging containers and git repositories...'
 echo 'Ensure latest version of all images are available...'
 for SERVICE_NAME in $SERVICE_PROJECT_LIST; do
     IMAGE=${DOCKER_REGISTRY}${SERVICE_NAME}
-    IMAGE_AND_TAG=${IMAGE}:latest
+    IMAGE_AND_TAG=${IMAGE}:master
     NEW_TAG=${IMAGE}':'${NEW_VERSION}
     if [[ $SERVICE_NAME == "object-detection-service-gpu" ]]
     then
         SERVICE_NAME="object-detection-service"
         IMAGE=${DOCKER_REGISTRY}${SERVICE_NAME}
-        IMAGE_AND_TAG=${IMAGE}:latest-gpu
+        IMAGE_AND_TAG=${IMAGE}:master-gpu
         NEW_TAG=${IMAGE}':'${NEW_VERSION}'-gpu'
     else
         echo "Creating GIT tag in gitlab for ${SERVICE_NAME} with ${NEW_VERSION}"
