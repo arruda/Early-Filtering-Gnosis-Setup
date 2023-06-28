@@ -305,7 +305,7 @@ services:
       - LOGGING_LEVEL=${LOGGING_LEVEL}
 
   access-point:
-    image: registry.insight-centre.org/sit/mps/felipe-phd/access-point:master
+    image: registry.insight-centre.org/sit/mps/felipe-phd/access-point:${IMAGE_TAG}
     command: python /service/access_point/run.py
     depends_on:
       - redis
