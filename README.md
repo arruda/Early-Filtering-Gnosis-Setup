@@ -1,5 +1,5 @@
-# MPS Node
-Node for executing the MPS in a single machine (inside containers).
+# Gnosis Node
+Project for executing a Gnosis Node in a machine (inside containers).
 
 # Docker Registry Access
 Before using the project one needs to login on our internal docker registry.
@@ -13,7 +13,7 @@ docker login registry.insight-centre.org
 # Configure .env
 Copy the `example.env` file to `.env`, and inside it replace `SIT_PYPI_USER` and `SIT_PYPI_PASS` with the correct information.
 
-## Using a specific a MPS version
+## Using a specific Gnosis version
 Replace the `IMAGE_TAG=latest` variable with version you want to use, eg: `IMAGE_TAG=v1.0.0`
 
 
@@ -73,7 +73,7 @@ More information on this can be read on the [docker-compose docs](https://docs.d
 
 
 
-# Generating new MPS version
+# Generating new Gnosis version
 
 To create the tags for all services containers and git repositories, follow the next steps:
 
