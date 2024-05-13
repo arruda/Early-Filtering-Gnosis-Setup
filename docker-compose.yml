@@ -23,7 +23,7 @@ services:
       - 9411:9411
 
   worker-profile-rating:
-    image: registry.insight-centre.org/sit/mps/felipe-phd/worker-profile-rating:${IMAGE_TAG}
+    image: arruda/worker-profile-rating:${IMAGE_TAG}
     command: python /service/worker_profile_rating/run.py
     depends_on:
       - redis
@@ -42,7 +42,7 @@ services:
       - LOGGING_LEVEL=${LOGGING_LEVEL}
 
   slr-worker-ranking:
-    image: registry.insight-centre.org/sit/mps/felipe-phd/slr-worker-ranking:${IMAGE_TAG}
+    image: arruda/slr-worker-ranking:${IMAGE_TAG}
     command: python /service/slr_worker_ranking/run.py
     depends_on:
       - redis
@@ -62,7 +62,7 @@ services:
       - LOGGING_LEVEL=${LOGGING_LEVEL}
 
   client-manager:
-    image: registry.insight-centre.org/sit/mps/felipe-phd/client-manager:${IMAGE_TAG}
+    image: arruda/client-manager:${IMAGE_TAG}
     command: python /service/client_manager/run.py
     depends_on:
       - redis
@@ -84,7 +84,7 @@ services:
       - LOGGING_LEVEL=${LOGGING_LEVEL}
 
   query-planner:
-    image: registry.insight-centre.org/sit/mps/felipe-phd/query-planner:${IMAGE_TAG}
+    image: arruda/query-planner:${IMAGE_TAG}
     command: python /service/query_planner/run.py
     depends_on:
       - redis
@@ -103,7 +103,7 @@ services:
       - LOGGING_LEVEL=${LOGGING_LEVEL}
 
   adaptation-monitor:
-    image: registry.insight-centre.org/sit/mps/felipe-phd/adaptation-monitor:${IMAGE_TAG}
+    image: arruda/adaptation-monitor:${IMAGE_TAG}
     command: python /service/adaptation_monitor/run.py
     depends_on:
       - redis
@@ -122,7 +122,7 @@ services:
       - LOGGING_LEVEL=${LOGGING_LEVEL}
 
   adaptation-analyser:
-    image: registry.insight-centre.org/sit/mps/felipe-phd/adaptation-analyser:${IMAGE_TAG}
+    image: arruda/adaptation-analyser:${IMAGE_TAG}
     command: python /service/adaptation_analyser/run.py
     depends_on:
       - redis
@@ -147,7 +147,7 @@ services:
       - LOGGING_LEVEL=${LOGGING_LEVEL}
 
   adaptation-planner:
-    image: registry.insight-centre.org/sit/mps/felipe-phd/adaptation-planner:${IMAGE_TAG}
+    image: arruda/adaptation-planner:${IMAGE_TAG}
     command: python /service/adaptation_planner/run.py
     depends_on:
       - redis
@@ -176,7 +176,7 @@ services:
       - LOGGING_LEVEL=${LOGGING_LEVEL}
 
   scheduler:
-    image: registry.insight-centre.org/sit/mps/felipe-phd/scheduler:${IMAGE_TAG}
+    image: arruda/scheduler:${IMAGE_TAG}
     command: python /service/scheduler/run.py
     depends_on:
       - redis
@@ -197,7 +197,7 @@ services:
       - LOGGING_LEVEL=${LOGGING_LEVEL}
 
   preprocessor:
-    image: registry.insight-centre.org/sit/mps/felipe-phd/preprocessing-service:${IMAGE_TAG}
+    image: arruda/preprocessing-service:${IMAGE_TAG}
     command: python /service/preprocessing/run.py
     depends_on:
       - redis
@@ -216,7 +216,7 @@ services:
       - LOGGING_LEVEL=${LOGGING_LEVEL}
 
   event-dispatcher:
-    image: registry.insight-centre.org/sit/mps/felipe-phd/event-dispatcher:${IMAGE_TAG}
+    image: arruda/event-dispatcher:${IMAGE_TAG}
     command: python /service/event_dispatcher/run.py
     depends_on:
       - redis
@@ -233,7 +233,7 @@ services:
       - LOGGING_LEVEL=${LOGGING_LEVEL}
 
   window-manager:
-    image: registry.insight-centre.org/sit/mps/felipe-phd/window-manager:${IMAGE_TAG}
+    image: arruda/window-manager:${IMAGE_TAG}
     command: python /service/window_manager/run.py
     depends_on:
       - redis
@@ -251,7 +251,7 @@ services:
       - LOGGING_LEVEL=${LOGGING_LEVEL}
 
   matcher:
-    image: registry.insight-centre.org/sit/mps/felipe-phd/matcher:${IMAGE_TAG}
+    image: arruda/matcher:${IMAGE_TAG}
     command: python /service/matcher/run.py
     depends_on:
       - redis
@@ -269,7 +269,7 @@ services:
       - LOGGING_LEVEL=${LOGGING_LEVEL}
 
   forwarder:
-    image: registry.insight-centre.org/sit/mps/felipe-phd/forwarder:${IMAGE_TAG}
+    image: arruda/forwarder:${IMAGE_TAG}
     command: python /service/forwarder/run.py
     depends_on:
       - redis
@@ -286,7 +286,7 @@ services:
       - LOGGING_LEVEL=${LOGGING_LEVEL}
 
   videostreamforwarder:
-    image: registry.insight-centre.org/sit/mps/felipe-phd/videostreamforwarder:${IMAGE_TAG}
+    image: arruda/videostreamforwarder:${IMAGE_TAG}
     command: python /service/videostreamforwarder/run.py
     depends_on:
       - redis
@@ -305,7 +305,7 @@ services:
       - LOGGING_LEVEL=${LOGGING_LEVEL}
 
   access-point:
-    image: registry.insight-centre.org/sit/mps/felipe-phd/access-point:${IMAGE_TAG}
+    image: arruda/access-point:${IMAGE_TAG}
     command: python /service/access_point/run.py
     depends_on:
       - redis

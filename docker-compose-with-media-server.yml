@@ -1,7 +1,7 @@
 version: '2.3'
 services:
   media-server:
-    image: registry.insight-centre.org/sit/mps/media-server:latest
+    image: arruda/media-server:latest
     ports:
       - "1934:1935"
       - "8080:8080"
