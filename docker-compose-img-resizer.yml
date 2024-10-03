@@ -1,0 +1,33 @@
+version: '2.3'
+services:
+  image-resizer:
+    runtime: nvidia
+    image: arruda/image-resizer-service:master
+    command: python3 image_resizer_service/run.py
+
+    depends_on:
+      - redis
+      - adaptation-planner
+      - adaptation-monitor
+      - adaptation-analyser
+      - client-manager
+
+    environment:
+      - PYTHONUNBUFFERED=0
+      - REDIS_ADDRESS=${REDIS_ADDRESS}
+      - REDIS_PORT=${REDIS_PORT}
+      - TRACER_REPORTING_HOST=${TRACER_REPORTING_HOST}
+      - TRACER_REPORTING_PORT=${TRACER_REPORTING_PORT}
+      - SERVICE_STREAM_KEY=${IMAGE_RESIZER_STREAM_KEY}
+      - PUB_EVENT_TYPE_SERVICE_WORKER_ANNOUNCED=${EVENT_TYPE_SERVICE_WORKER_ANNOUNCED}
+      - SERVICE_DETAILS_SERVICE_TYPE=ImageResizer
+      - SERVICE_DETAILS_CONTENT_TYPES=none
+      - SERVICE_DETAILS_STREAM_KEY=${IMAGE_RESIZER_STREAM_KEY}
+      - SERVICE_DETAILS_QUEUE_LIMIT=100
+      - SERVICE_DETAILS_THROUGHPUT=100
+      - SERVICE_DETAILS_ACCURACY=1
+      - SERVICE_DETAILS_ENERGY_CONSUMPTION=10
+      - RESIZE_METHOD=${RESIZE_METHOD}
+      - RESIZE_SCALE=${RESIZE_SCALE}
+    volumes:
+      - /etc/localtime:/etc/localtime:ro

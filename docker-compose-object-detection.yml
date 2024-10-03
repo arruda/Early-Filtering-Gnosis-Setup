@@ -1,0 +1,36 @@
+version: '2.3'
+services:
+
+  object-detection-yolo:
+    image: arruda/pytorch-object-detection-service:${IMAGE_TAG}
+    command: python /service/pytorch_object_detection_service/run.py
+
+    depends_on:
+      - redis
+      - adaptation-planner
+      - adaptation-monitor
+      - adaptation-analyser
+      - client-manager
+
+    environment:
+      - REDIS_ADDRESS=${REDIS_ADDRESS}
+      - REDIS_PORT=${REDIS_PORT}
+      - SERVICE_STREAM_KEY=${OBJECT_DETECTION_YOLO_STREAM_KEY}
+      - PUB_EVENT_TYPE_SERVICE_WORKER_ANNOUNCED=${EVENT_TYPE_SERVICE_WORKER_ANNOUNCED}
+      - SERVICE_DETAILS_SERVICE_TYPE=ObjectDetection
+      - SERVICE_DETAILS_CONTENT_TYPES=node_attribute:bounding_box,node_attribute:label,node_attribute:confidence,node:person,node:car
+      - SERVICE_DETAILS_STREAM_KEY=${OBJECT_DETECTION_YOLO_STREAM_KEY}
+      - SERVICE_DETAILS_QUEUE_LIMIT=100
+      - SERVICE_DETAILS_THROUGHPUT=22
+      - SERVICE_DETAILS_ACCURACY=0.20
+      - SERVICE_DETAILS_ENERGY_CONSUMPTION=200
+      - TRACER_REPORTING_HOST=${TRACER_REPORTING_HOST}
+      - TRACER_REPORTING_PORT=${TRACER_REPORTING_PORT}
+      - PYTHONUNBUFFERED=0
+      - DETECTION_THRESHOLD=0.5
+      - OBJ_MODEL_NAME=yolov5n
+      - LOGGING_LEVEL=${LOGGING_LEVEL}
+      - SERVICE_REGISTRY_CMD_KEY=dontneed
+      - SERVICE_CMD_KEY=dontneed
+    volumes:
+      - /etc/localtime:/etc/localtime:ro

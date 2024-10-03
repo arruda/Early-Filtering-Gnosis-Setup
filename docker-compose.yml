@@ -200,25 +200,6 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
 
-  # preprocessor:
-  #   image: arruda/preprocessing-service:${IMAGE_TAG}
-  #   command: python /service/preprocessing/run.py
-  #   depends_on:
-  #     - redis
-
-  #   environment:
-  #     - PYTHONUNBUFFERED=0
-  #     - REDIS_ADDRESS=${REDIS_ADDRESS}
-  #     - REDIS_PORT=${REDIS_PORT}
-  #     - TRACER_REPORTING_HOST=${TRACER_REPORTING_HOST}
-  #     - TRACER_REPORTING_PORT=${TRACER_REPORTING_PORT}
-  #     - SERVICE_STREAM_KEY=${PREPROCESSOR_STREAM_KEY}
-  #     - LISTEN_EVENT_TYPE_QUERY_CREATED=${EVENT_TYPE_QUERY_CREATED}
-  #     - LISTEN_EVENT_TYPE_QUERY_REMOVED=${EVENT_TYPE_QUERY_REMOVED}
-  #     - FFMPEG_BIN=/service/ffmpeg_bin/ffmpeg-linux64-v3.3.1
-  #     - REDIS_EXPIRATION_TIME=${REDIS_EXPIRATION_TIME}
-  #     - LOGGING_LEVEL=${LOGGING_LEVEL}
-
   event-dispatcher:
     image: arruda/event-dispatcher:${IMAGE_TAG}
     command: python /service/event_dispatcher/run.py
