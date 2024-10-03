@@ -1,5 +1,5 @@
 # Gnosis Early Filtering E2E setup
-Fork of the Gnosis Node, with specific configurations for easy to run and reproduce the experiments on the end-to-end Early Filtering pipeline. The idea is to run this readly configured Gnosis node on the Server. On the Raspberry Pi one should instead download/gitclone the [Adaptive Publisher](https://github.com/Gnosis-MEP/Adaptive-Publisher). See the experiment protocol section on for the detailed steps on running the E2E, including information on how to setup and run the AdaptivePublisher part.
+Fork of the [Gnosis Node](https://github.com/Gnosis-MEP/Gnosis-Node), with specific configurations for easy to run and reproduce the experiments on the end-to-end Early Filtering pipeline. The idea is to run this readly configured Gnosis node on the Server. On the Raspberry Pi one should instead download/gitclone the [Adaptive Publisher](https://github.com/Gnosis-MEP/Adaptive-Publisher). See the experiment protocol section on for the detailed steps on running the E2E, including information on how to setup and run the AdaptivePublisher part.
 
 
 # Requirements
@@ -119,26 +119,6 @@ Copy the `example.env` file to `.env`. No need to change any configuration, sinc
     - Then run `docker-compose down` to clean up the docker containers.
 - On the Server:
     - Back in this clonned repository location, run the same script you use to start the Server components, but with the `down` argument, eg: `./compose-all-<method>.sh down` (where method is either `gnosis` or `cloudseg`).
-
-
-
-# Running
-Load the environment variables from .env in the environment, one way of doing this is using `source load_env.sh` command.
-Then run the script for the version of the system you want to run on the Server (the standard Gnosis version, or the one with the CloudSeg ImageResizer component), as described above:
-
-## Gnosis Early Filtering
-Execute: `./compose-all-gnosis.sh up -d`
-
-## CloudSeg Version
-Execute: `./compose-all-cloudseg.sh up -d`
-
-# Stopping/Remove All Data
-
-## Gnosis Early Filtering
-Execute: `./compose-all-gnosis.sh down`
-
-## CloudSeg Version
-Execute: `./compose-all-cloudseg.sh down`
 
 
 # Logs
