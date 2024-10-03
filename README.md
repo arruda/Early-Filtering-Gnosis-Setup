@@ -30,7 +30,7 @@ Copy the `example.env` file to `.env`. No need to change any configuration, sinc
 **PS**: Before executing the experiment for real, you should first do a hot-start on both the Server and the Edge. For that you can follow these same steps, but you don't need to run any of the Benchmark-tools commands, and you after running everything for a few minutes, you can stop and cleanup everything before starting things for real. To really start the experiment, remember to do all the steps in here from the start without skipping any.
 
 - On the Server:
-    - On this clonned repository location, execute the "`./compose-all-<method>.sh up -d`" where <method> is either `gnosis` or `cloudseg`. (use "`./new-compose-all-<method>.sh up -d`" if using new docker version.)
+    - On this clonned repository location, execute the "`./compose-all-<method>.sh up -d`" where `<method>` is either `gnosis` or `cloudseg`. (use "`./new-compose-all-<method>.sh up -d`" if using new docker version.)
     - On the Benchmark-tools clonned repository location, start listening/saving the end-user query results by its registered query name. For the Jackson1 dataset, the query is called `AnyCars` for the Houston1 it is called `CountCars`. The example bellow is the code to save the results of the `AnyCars` query.
         - `docker-compose run --rm benchmark-tools python ./benchmark_tools/task_generator/task_export_stream_content.py AnyCars`
         - This command will keep running on that terminal until you stop it, it will also notify you of the name of the JSON lines file that it is saving the contents to (e.g., `outputs/export_50809f300b8e646a3e7735569a0da37f.jl`).
