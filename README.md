@@ -35,38 +35,12 @@ Copy the `example.env` file to `.env`. No need to change any configuration, sinc
         - `docker-compose run --rm benchmark-tools python ./benchmark_tools/task_generator/task_export_stream_content.py AnyCars`
         - This command will keep running on that terminal until you stop it, it will also notify you of the name of the JSON lines file that it is saving the contents to (e.g., `outputs/export_50809f300b8e646a3e7735569a0da37f.jl`).
 - On the Edge:
-    - Copy the example env file for the subdataset (Houston1 or Jackson1) and method in question ("gnosis" or "cloudseg"), into a new file called `.env`. Example: copy `Jackson1_gnosis.env` into a new file called `.env` if you are evaluating the gnosis early filtering method on the Jackson1 subdataset. Makle sure to use the same method as the one used in the Server. If the `.env` file already exist, just replace it with the new one you wish to use.
+    - Copy the configuration env file for the subdataset (Houston1 or Jackson1) and method in question ("gnosis" or "cloudseg"), into a new file called `.env`. Example: copy `Jackson1_gnosis.env` into a new file called `.env` if you are evaluating the gnosis early filtering method on the Jackson1 subdataset. Makle sure to use the same method as the one used in the Server. If the `.env` file already exist, just replace it with the new one you wish to use.
     - Start the Edge components by running `docker-compose up service`
 
 - On the Server:
     - Go to the Gnosis Access Point Web Interface: [http://localhost:8000/](http://localhost:8000/), and click to [Add Subscription Query] button.
     - On the New Query page replace the query text with the specific    Query for each method and dataset being used:
-        - Jackson1 car detection query using Gnosis Early Filtering:
-            ```
-            REGISTER QUERY AnyCars
-            OUTPUT AnnotatedVideoStream
-            CONTENT ObjectDetection
-            MATCH (c:car)
-            FROM publisher1 WITHIN TUMBLING_COUNT_WINDOW(1)
-            WITH_QOS
-            accuracy = 'medium_importance',
-            latency = 'medium_importance',
-            energy_consumption = 'medium_importance'
-            RETURN c
-            ```
-        - Jackson1 car detection query using CloudSeg:
-            ```
-            REGISTER QUERY AnyCars
-            OUTPUT AnnotatedVideoStream
-            CONTENT ImageResizer, ObjectDetection
-            MATCH (c:car)
-            FROM publisher1 WITHIN TUMBLING_COUNT_WINDOW(1)
-            WITH_QOS
-            accuracy = 'medium_importance',
-            latency = 'medium_importance',
-            energy_consumption = 'medium_importance'
-            RETURN c
-            ```
         - Houston1 car counting query using Gnosis Early Filtering:
             ```
             REGISTER QUERY CountCars
@@ -93,6 +67,32 @@ Copy the `example.env` file to `.env`. No need to change any configuration, sinc
             energy_consumption = 'medium_importance'
             RETURN count(distinct c) as CarCount
             ```
+        - Jackson1 car detection query using Gnosis Early Filtering:
+            ```
+            REGISTER QUERY AnyCars
+            OUTPUT AnnotatedVideoStream
+            CONTENT ObjectDetection
+            MATCH (c:car)
+            FROM publisher1 WITHIN TUMBLING_COUNT_WINDOW(1)
+            WITH_QOS
+            accuracy = 'medium_importance',
+            latency = 'medium_importance',
+            energy_consumption = 'medium_importance'
+            RETURN c
+            ```
+        - Jackson1 car detection query using CloudSeg:
+            ```
+            REGISTER QUERY AnyCars
+            OUTPUT AnnotatedVideoStream
+            CONTENT ImageResizer, ObjectDetection
+            MATCH (c:car)
+            FROM publisher1 WITHIN TUMBLING_COUNT_WINDOW(1)
+            WITH_QOS
+            accuracy = 'medium_importance',
+            latency = 'medium_importance',
+            energy_consumption = 'medium_importance'
+            RETURN c
+            ```
 
     - Then click on Add Query, and it should show a Pop-Up saying that the Query was registered, and redirect to the end-user query viewing page and should trigger the Edge publisher to start its processing.
     - You can close this query page now.
@@ -110,7 +110,7 @@ Copy the `example.env` file to `.env`. No need to change any configuration, sinc
             - `docker-compose run --rm benchmark-tools python ./benchmark_tools/evaluation/per_service_speed_evaluation.py > outputs/per_service_speed.json`
     - This will leave you with the following files on the `outputs/` directory of the benchmark-tools:
         - `AdaptivePublisher-process_next_frame.json`: Jaeger exported Event traces file.
-        - `per_service_speed.json`: Detailed processing speed of each service and its operations, average values end with `_avg` and the standard deviation ends with `_std`.
+        - `per_service_speed.json`: Detailed processing speed of each service and its operations, average values end with `_avg` and the standard deviation ends with `_std`. **ps**: depending on your docker version this file may contain on its first line some logging information for the container, if that's the case, just remove the first line. (the first line should only contain the `{` character).
         - `<query_id>.jl`: the JSON lines file with the exported results of the end-user query.
 
 ## Stopping/Cleanup:
