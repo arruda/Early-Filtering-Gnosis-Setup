@@ -10,7 +10,7 @@ services:
 
   jaeger:
     image: jaegertracing/all-in-one:1.24
-    command: --log-level=debug
+    command: --log-level=debug --query.max-clock-skew-adjustment=1s
     # environment:
     #   - SPAN_STORAGE_TYPE=badger
     ports:
@@ -21,6 +21,8 @@ services:
       - 16686:16686
       - 14268:14268
       - 9411:9411
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
 
   worker-profile-rating:
     image: arruda/worker-profile-rating:${IMAGE_TAG}
@@ -195,6 +197,8 @@ services:
       - LISTEN_EVENT_TYPE_UNNECESSARY_LOAD_SHEDDING_PLANNED=${EVENT_TYPE_UNNECESSARY_LOAD_SHEDDING_PLANNED}
       - PUB_EVENT_TYPE_SCHEDULING_PLAN_EXECUTED=${EVENT_TYPE_SCHEDULING_PLAN_EXECUTED}
       - LOGGING_LEVEL=${LOGGING_LEVEL}
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
 
   # preprocessor:
   #   image: arruda/preprocessing-service:${IMAGE_TAG}
@@ -231,6 +235,8 @@ services:
       - LISTEN_EVENT_TYPE_QUERY_CREATED=${EVENT_TYPE_QUERY_CREATED}
       - LISTEN_EVENT_TYPE_QUERY_REMOVED=${EVENT_TYPE_QUERY_REMOVED}
       - LOGGING_LEVEL=${LOGGING_LEVEL}
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
 
   window-manager:
     image: arruda/window-manager:${IMAGE_TAG}
@@ -249,6 +255,8 @@ services:
       - LISTEN_EVENT_TYPE_QUERY_CREATED=${EVENT_TYPE_QUERY_CREATED}
       - LISTEN_EVENT_TYPE_QUERY_REMOVED=${EVENT_TYPE_QUERY_REMOVED}
       - LOGGING_LEVEL=${LOGGING_LEVEL}
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
 
   matcher:
     image: arruda/matcher:${IMAGE_TAG}
@@ -267,6 +275,8 @@ services:
       - LISTEN_EVENT_TYPE_QUERY_CREATED=${EVENT_TYPE_QUERY_CREATED}
       - LISTEN_EVENT_TYPE_QUERY_REMOVED=${EVENT_TYPE_QUERY_REMOVED}
       - LOGGING_LEVEL=${LOGGING_LEVEL}
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
 
   forwarder:
     image: arruda/forwarder:${IMAGE_TAG}
@@ -284,6 +294,8 @@ services:
       - LISTEN_EVENT_TYPE_QUERY_CREATED=${EVENT_TYPE_QUERY_CREATED}
       - LISTEN_EVENT_TYPE_QUERY_REMOVED=${EVENT_TYPE_QUERY_REMOVED}
       - LOGGING_LEVEL=${LOGGING_LEVEL}
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
 
   videostreamforwarder:
     image: arruda/videostreamforwarder:${IMAGE_TAG}
@@ -303,6 +315,8 @@ services:
       - SUPPORTED_VIDEO_OUTPUT_TYPES=${SUPPORTED_VIDEO_OUTPUT_TYPES}
       - OUPUT_MEDIA_SERVER_URL=${OUPUT_MEDIA_SERVER_URL}
       - LOGGING_LEVEL=${LOGGING_LEVEL}
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
 
   access-point:
     image: arruda/access-point:${IMAGE_TAG}
@@ -326,3 +340,5 @@ services:
       - PUB_EVENT_TYPE_PUBLISHER_CREATED=${EVENT_TYPE_PUBLISHER_CREATED}
       - SUBSCRIBER_MEDIA_SERVER_URL=${SUBSCRIBER_MEDIA_SERVER_URL}
       - LOGGING_LEVEL=${LOGGING_LEVEL}
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
